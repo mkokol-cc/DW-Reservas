@@ -1,0 +1,26 @@
+<mat-accordion>
+    <mat-expansion-panel>
+        <mat-expansion-panel-header>
+            <mat-panel-title>
+                Servicios
+            </mat-panel-title>
+        </mat-expansion-panel-header>
+
+        <mat-list>
+            <mat-list-item>Corte y Barba $3000 ($1500) 30min         
+                <button mat-mini-fab color="primary" aria-label="Example icon button with a menu icon" (click)="edit()">
+                    <mat-icon>menu</mat-icon>
+                </button>        
+                <button mat-mini-fab color="primary" aria-label="Example icon button with a menu icon" (click)="delete()">
+                    <mat-icon>menu</mat-icon>
+                </button></mat-list-item>
+            <mat-divider></mat-divider>
+            <mat-list-item>Item 2</mat-list-item>
+            <mat-divider></mat-divider>
+            <mat-list-item>Item 3</mat-list-item>
+        </mat-list>
+
+        <button mat-flat-button color="primary" (click)="create()">Nuevo</button>
+
+    </mat-expansion-panel>
+</mat-accordion>
