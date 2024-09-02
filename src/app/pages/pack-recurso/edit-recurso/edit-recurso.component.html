@@ -1,1 +1,21 @@
-<p>edit-recurso works!</p>
+<h2 mat-dialog-title>Editar Recurso "{{data.nombre}}"</h2>
+<mat-dialog-content>
+    <form class="example-form" [formGroup]="form" (ngSubmit)="onSubmit()">
+
+        <mat-form-field>
+            <mat-label>Nombre</mat-label>
+            <input matInput placeholder="Nombre del recurso" formControlName="nombre">
+            @if (form.get('nombre')!.invalid) {
+                <mat-error>Ingrese un Nombre</mat-error>
+            }
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label>Descripcion</mat-label>
+            <input matInput placeholder="Breve descripción del recurso" formControlName="descripcion">
+        </mat-form-field>
+
+        <button mat-flat-button color="primary" type="submit" [disabled]="form.invalid" [mat-dialog-close]="form.value">Guardar</button>
+
+    </form>
+</mat-dialog-content>
