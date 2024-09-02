@@ -1,26 +1,60 @@
-<h2 mat-dialog-title>Nuevo Servicio</h2>
+<h2 mat-dialog-title>Editar Servicio "{{data.nombre}}"</h2>
 <mat-dialog-content>
-    <form class="example-form">
-        <mat-form-field class="example-full-width">
-            <mat-label>Favorite food</mat-label>
-            <input matInput placeholder="Ex. Pizza" value="Sushi">
-        </mat-form-field>
-      
-        <mat-form-field class="example-full-width">
-            <mat-label>Leave a comment</mat-label>
-            <textarea matInput placeholder="Ex. It makes me feel..."></textarea>
+    <form class="example-form" [formGroup]="form" (ngSubmit)="onSubmit()">
+
+        <mat-form-field>
+            <mat-label>Nombre</mat-label>
+            <input matInput placeholder="Nombre del servicio" formControlName="nombre">
+            @if (form.get('nombre')!.invalid) {
+                <mat-error>Ingrese un Nombre</mat-error>
+            }
         </mat-form-field>
 
-        <mat-form-field class="example-full-width">
-            <mat-label>Favorite food</mat-label>
-            <input matInput placeholder="Ex. Pizza" value="Sushi">
-        </mat-form-field>
-      
-        <mat-form-field class="example-full-width">
-            <mat-label>Leave a comment</mat-label>
-            <textarea matInput placeholder="Ex. It makes me feel..."></textarea>
+        <mat-form-field>
+            <mat-label>Descripcion</mat-label>
+            <input matInput placeholder="Breve descripción del servicio" formControlName="descripcion">
         </mat-form-field>
 
-        <button mat-flat-button color="primary" type="submit">Guardar</button>
+        <mat-form-field floatLabel="always">
+            <mat-label>Duracion</mat-label>
+            <input matInput type="number" min="0" max="1440" placeholder="0" formControlName="duracion">
+            <span matTextSuffix>minutos</span>
+            @if (form.get('duracion')!.invalid) {
+                <mat-error>Ingrese una duracion entre 0 y 1440 minutos</mat-error>
+            }
+        </mat-form-field>
+
+        <mat-form-field floatLabel="always">
+            <mat-label>Precio Base</mat-label>
+            <input matInput type="number" min="0" placeholder="0" formControlName="precio">
+            <span matTextPrefix>$&nbsp;</span>
+            <span matTextSuffix>.00</span>
+            @if (form.get('precio')!.invalid) {
+                <mat-error>Ingrese un precio válido</mat-error>
+            }
+        </mat-form-field>
+
+        <mat-form-field floatLabel="always">
+            <mat-label>Precio Maximo</mat-label>
+            <input matInput type="number" min="0" placeholder="0" formControlName="precioMaximo">
+            <span matTextPrefix>$&nbsp;</span>
+            <span matTextSuffix>.00</span>
+            @if (form.get('precioMaximo')!.invalid) {
+                <mat-error>Ingrese un precio válido</mat-error>
+            }
+        </mat-form-field>
+
+        <mat-form-field floatLabel="always">
+            <mat-label>Pago Anticipado</mat-label>
+            <input matInput type="number" min="0" placeholder="0" formControlName="precioSenia">
+            <span matTextPrefix>$&nbsp;</span>
+            <span matTextSuffix>.00</span>
+            @if (form.get('precioSenia')!.invalid) {
+                <mat-error>Ingrese un precio válido</mat-error>
+            }
+        </mat-form-field>
+
+        <button mat-flat-button color="primary" type="submit" [disabled]="form.invalid">Guardar</button>
+
     </form>
 </mat-dialog-content>

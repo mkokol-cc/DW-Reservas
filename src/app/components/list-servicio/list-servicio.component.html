@@ -7,20 +7,37 @@
         </mat-expansion-panel-header>
 
         <mat-list>
-            <mat-list-item>Corte y Barba $3000 ($1500) 30min         
-                <button mat-mini-fab color="primary" aria-label="Example icon button with a menu icon" (click)="edit()">
-                    <mat-icon>menu</mat-icon>
-                </button>        
-                <button mat-mini-fab color="primary" aria-label="Example icon button with a menu icon" (click)="delete()">
-                    <mat-icon>menu</mat-icon>
-                </button></mat-list-item>
+
+            @for (servicio of list; track servicio) {
+
+                <mat-divider></mat-divider>
+
+                <mat-list-item>
+                    <span matListItemTitle>{{servicio.nombre}}, {{servicio.duracion}} minutos</span>
+                    <span matListItemLine>${{servicio.precio}} <span> - ${{servicio.precioMaximo}}</span><span> (${{servicio.precioSenia}})</span></span>
+                    <div matListItemMeta>
+                        <button mat-icon-button color="primary" aria-label="Example icon button with a menu icon" (click)="edit(servicio)">
+                            <mat-icon>edit</mat-icon>
+                        </button>        
+                        <button mat-icon-button color="primary" aria-label="Example icon button with a menu icon" (click)="delete(servicio)">
+                            <mat-icon>delete</mat-icon>
+                        </button>
+                    </div>
+                </mat-list-item>
+            }
+
             <mat-divider></mat-divider>
-            <mat-list-item>Item 2</mat-list-item>
-            <mat-divider></mat-divider>
-            <mat-list-item>Item 3</mat-list-item>
+
         </mat-list>
 
-        <button mat-flat-button color="primary" (click)="create()">Nuevo</button>
+        <div style="display: flex;align-items: center;justify-content: space-between;">
+            <div>
+                <p>Servicios Registrados: {{list.length}}</p>
+            </div>
+            <div>
+                <button mat-flat-button color="primary" (click)="create()">Nuevo</button>
+            </div>
+        </div>
 
     </mat-expansion-panel>
 </mat-accordion>

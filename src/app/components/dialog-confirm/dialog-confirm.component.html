@@ -2,3 +2,7 @@
 <mat-dialog-content>
     {{data.message}}
 </mat-dialog-content>
+<mat-dialog-actions>
+    <button mat-button (click)="onNoClick()">Cancelar</button>
+    <button mat-button [mat-dialog-close]="true" cdkFocusInitial>Borrar</button>
+</mat-dialog-actions>
