@@ -1,1 +1,42 @@
-<p>list-recurso works!</p>
+<mat-accordion>
+    <mat-expansion-panel>
+        <mat-expansion-panel-header>
+            <mat-panel-title>
+                Recursos
+            </mat-panel-title>
+        </mat-expansion-panel-header>
+
+        <mat-list>
+
+            @for (recurso of list; track recurso) {
+
+                <mat-divider></mat-divider>
+
+                <mat-list-item>
+                    <span matListItemTitle>{{recurso.nombre}}</span>
+                    <div matListItemMeta>
+                        <button mat-icon-button color="primary" aria-label="Example icon button with a menu icon" (click)="edit(recurso)">
+                            <mat-icon>edit</mat-icon>
+                        </button>        
+                        <button mat-icon-button color="primary" aria-label="Example icon button with a menu icon" (click)="delete(recurso)">
+                            <mat-icon>delete</mat-icon>
+                        </button>
+                    </div>
+                </mat-list-item>
+            }
+
+            <mat-divider></mat-divider>
+
+        </mat-list>
+
+        <div style="display: flex;align-items: center;justify-content: space-between;">
+            <div>
+                <p>recursos Registrados: {{list.length}}</p>
+            </div>
+            <div>
+                <button mat-flat-button color="primary" (click)="create()">Nuevo</button>
+            </div>
+        </div>
+
+    </mat-expansion-panel>
+</mat-accordion>

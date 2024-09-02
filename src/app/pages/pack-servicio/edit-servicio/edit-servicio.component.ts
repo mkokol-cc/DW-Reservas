@@ -27,7 +27,7 @@ export class EditServicioComponent {
       nombre: [data.nombre, [Validators.required]],
       duracion: [data.duracion, [Validators.required, Validators.min(1), Validators.max(1440)]],
       precio: [data.precio, [Validators.required, Validators.min(0), Validators.max(99999999)]],
-      precioMaximo: [data.precioMaximo, [Validators.required, Validators.min(0), Validators.max(99999999)]],
+      precioMaximo: [data.precioMaximo, [Validators.min(0), Validators.max(99999999)]],
       precioSenia: [data.precioSenia, [Validators.min(0), Validators.max(99999999)]],
       descripcion: [data.descripcion],
     })

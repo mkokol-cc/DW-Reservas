@@ -54,13 +54,23 @@ export class ListServicioComponent {
     eliminado:false,
   }]
 
-  constructor(public dialog: MatDialog, private toastr: ToastrService) {}
+  constructor(public dialog: MatDialog, private toastr: ToastrService) {
+    this.orderList()
+  }
 
   create() {
     const dialogRef = this.dialog.open(CreateServicioComponent);
     dialogRef.afterClosed().subscribe(result => {
       console.log(`Dialog result: ${result}`);
+      if(result){
+        this.list.push(<Servicio>result)
+        this.orderList()
+      }
     });
+  }
+
+  orderList(){
+    this.list.sort((a, b) => a.nombre.localeCompare(b.nombre));
   }
 
   delete(obj:Servicio) {
@@ -73,7 +83,9 @@ export class ListServicioComponent {
       //console.log('The dialog was closed');
       //this.animal = result;
       if(result){
-        this.toastr.success('Se edito correctamente el servicio!','Genial!');
+        this.toastr.success('Se elimino correctamente el servicio!','Genial!');
+        this.list = this.list.filter(servicio => servicio !== obj);
+        this.orderList()
       }
     });
   }
@@ -84,6 +96,11 @@ export class ListServicioComponent {
     });
     dialogRef.afterClosed().subscribe(result => {
       console.log(`Dialog result: ${result}`);
+      if(result){
+        this.list = this.list.filter(servicio => servicio !== obj);
+        this.list.push(<Servicio>result)
+        this.orderList()
+      }
     });
   }
 

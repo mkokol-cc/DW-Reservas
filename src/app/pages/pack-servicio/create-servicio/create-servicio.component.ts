@@ -21,7 +21,7 @@ export class CreateServicioComponent {
       nombre: ['', [Validators.required]],
       duracion: ['', [Validators.required, Validators.min(1), Validators.max(1440)]],
       precio: ['', [Validators.required, Validators.min(0), Validators.max(99999999)]],
-      precioMaximo: ['', [Validators.required, Validators.min(0), Validators.max(99999999)]],
+      precioMaximo: ['', [Validators.min(0), Validators.max(99999999)]],
       precioSenia: ['', [Validators.min(0), Validators.max(99999999)]],
       descripcion: [''],
     })
