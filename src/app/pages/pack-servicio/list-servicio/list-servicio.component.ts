@@ -6,8 +6,8 @@ import {MatExpansionModule} from '@angular/material/expansion';
 import {MatDialog, MatDialogModule} from '@angular/material/dialog';
 import { CreateServicioComponent } from '../create-servicio/create-servicio.component';
 import { EditServicioComponent } from '../edit-servicio/edit-servicio.component';
-import { DialogConfirmComponent } from '../dialog-confirm/dialog-confirm.component';
-import { Servicio } from '../../interfaces/servicio';
+import { DialogConfirmComponent } from '../../../components/dialog-confirm/dialog-confirm.component';
+import { Servicio } from '../../../interfaces/servicio';
 import {MatGridListModule} from '@angular/material/grid-list';
 import { ToastrService } from 'ngx-toastr';
 

@@ -10,8 +10,8 @@ import {
   MatDialogTitle,
   MatDialogContent,
 } from '@angular/material/dialog';
-import { Servicio } from '../../interfaces/servicio';
 import { ToastrService } from 'ngx-toastr';
+import { Servicio } from '../../../interfaces/servicio';
 
 @Component({
   selector: 'app-edit-servicio',
