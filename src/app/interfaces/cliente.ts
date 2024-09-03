@@ -3,4 +3,5 @@ export interface Cliente {
     apellido: string,
     telefono: string,
     habilitado: boolean,
+    cantidadReservas: number,
 }
