@@ -9,6 +9,7 @@ export const routes: Routes = [
 
         {path: 'servicios', loadComponent: () => import('./pages/pack-servicio/list-servicio/list-servicio.component').then(m => m.ListServicioComponent), pathMatch: 'full'},
         {path: 'reservas', loadComponent: () => import('./pages/pack-reserva/list-reserva/list-reserva.component').then(m => m.ListReservaComponent), pathMatch: 'full'},
+        {path: 'horarios', loadComponent: () => import('./pages/pack-horario/list-horario/list-horario.component').then(m => m.ListHorarioComponent), pathMatch: 'full'},
         {path: 'section-reservas', loadComponent: () => import('./pages/section-reservas/section-reservas.component').then(m => m.SectionReservasComponent), pathMatch: 'full'},
     ]},
 

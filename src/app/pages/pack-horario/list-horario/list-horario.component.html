@@ -1,0 +1,100 @@
+<p>{{list|json}}</p>
+
+<mat-accordion>
+    <mat-expansion-panel>
+        <mat-expansion-panel-header>
+            <mat-panel-title>
+                Mis Horarios
+            </mat-panel-title>
+        </mat-expansion-panel-header>
+
+        <mat-list>
+
+            <mat-divider></mat-divider>
+            <mat-list-item>
+                <span matListItemTitle>Lunes</span>
+                <span matListItemLine>
+                    @for (horario of list; track horario) {
+                        @if (horario.dia==1){
+                            <mat-chip-row (click)="edit(horario)"><!--(removed)="remove(fruit)" (click)="edit()"-->
+                                {{horario.inicio}}-{{horario.cierre}}
+                                <button matChipRemove (click)="delete(horario.id)"><!--(click)="delete()"-->
+                                  <mat-icon>cancel</mat-icon>
+                                </button>
+                            </mat-chip-row>
+                        }
+                    }
+                </span>
+                <div matListItemMeta>
+                    <button mat-icon-button color="primary" aria-label="Example icon button with a menu icon" (click)="create(1)"><!--(click)="create(0)"-->
+                        <mat-icon>add_circle</mat-icon>
+                    </button>
+                </div>
+            </mat-list-item>
+
+            <mat-divider></mat-divider>
+            <mat-list-item>
+                <span matListItemTitle>Martes</span>
+                <div matListItemMeta>
+                    <button mat-icon-button color="primary" aria-label="Example icon button with a menu icon"><!--(click)="add(0)"-->
+                        <mat-icon>add_circle</mat-icon>
+                    </button>        
+                </div>
+            </mat-list-item>
+
+            <mat-divider></mat-divider>
+            <mat-list-item>
+                <span matListItemTitle>Miercoles</span>
+                <div matListItemMeta>
+                    <button mat-icon-button color="primary" aria-label="Example icon button with a menu icon"><!--(click)="add(0)"-->
+                        <mat-icon>add_circle</mat-icon>
+                    </button>        
+                </div>
+            </mat-list-item>
+
+            <mat-divider></mat-divider>
+            <mat-list-item>
+                <span matListItemTitle>Jueves</span>
+                <div matListItemMeta>
+                    <button mat-icon-button color="primary" aria-label="Example icon button with a menu icon"><!--(click)="add(0)"-->
+                        <mat-icon>add_circle</mat-icon>
+                    </button>        
+                </div>
+            </mat-list-item>
+
+            <mat-divider></mat-divider>
+            <mat-list-item>
+                <span matListItemTitle>Viernes</span>
+                <div matListItemMeta>
+                    <button mat-icon-button color="primary" aria-label="Example icon button with a menu icon"><!--(click)="add(0)"-->
+                        <mat-icon>add_circle</mat-icon>
+                    </button>        
+                </div>
+            </mat-list-item>
+
+            <mat-divider></mat-divider>
+            <mat-list-item>
+                <span matListItemTitle>Sabado</span>
+                <div matListItemMeta>
+                    <button mat-icon-button color="primary" aria-label="Example icon button with a menu icon"><!--(click)="add(0)"-->
+                        <mat-icon>add_circle</mat-icon>
+                    </button>        
+                </div>
+            </mat-list-item>
+
+            <mat-divider></mat-divider>
+            <mat-list-item>
+                <span matListItemTitle>Domingo</span>
+                <div matListItemMeta>
+                    <button mat-icon-button color="primary" aria-label="Example icon button with a menu icon"><!--(click)="add(0)"-->
+                        <mat-icon>add_circle</mat-icon>
+                    </button>        
+                </div>
+            </mat-list-item>
+
+            <mat-divider></mat-divider>
+
+        </mat-list>
+
+    </mat-expansion-panel>
+</mat-accordion>

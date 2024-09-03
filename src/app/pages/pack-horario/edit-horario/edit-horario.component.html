@@ -1,0 +1,24 @@
+<h2 mat-dialog-title>Nuevo Horario - Dia Lunes</h2>
+<mat-dialog-content>
+    <form class="example-form" [formGroup]="form" (ngSubmit)="onSubmit()">
+
+        <mat-form-field>
+            <mat-label>Hora de Inicio</mat-label>
+            <input matInput type="time" formControlName="inicio">
+            @if (form.get('inicio')!.invalid) {
+                <mat-error>Ingrese un Horario de Inicio Valido</mat-error>
+            }
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label>Hora de Cierre</mat-label>
+            <input matInput type="time" formControlName="cierre">
+            @if (form.get('cierre')!.invalid) {
+                <mat-error>Ingrese un Horario de Cierre Valido</mat-error>
+            }
+        </mat-form-field>
+        
+        <button mat-flat-button color="primary" type="submit" [disabled]="form.invalid" [mat-dialog-close]="form.value">Guardar</button>
+
+    </form>
+</mat-dialog-content>
