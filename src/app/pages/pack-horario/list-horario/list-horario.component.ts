@@ -12,22 +12,36 @@ import { CreateHorarioComponent } from '../create-horario/create-horario.compone
 import { EditHorarioComponent } from '../edit-horario/edit-horario.component';
 import { HorarioService } from '../../../services/horario.service';
 import { CommonModule } from '@angular/common';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import { provideNativeDateAdapter } from '@angular/material/core';
+import { FormControl, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import {MatRadioModule} from '@angular/material/radio';
 
 @Component({
   selector: 'app-list-horario',
   standalone: true,
   imports: [MatButtonModule,MatChipsModule,MatIconModule,MatExpansionModule,MatListModule,MatDialogModule,MatGridListModule
-    ,CommonModule
+    ,CommonModule,
+    MatFormFieldModule, MatInputModule, MatDatepickerModule, FormsModule, ReactiveFormsModule, MatRadioModule
   ],
+  providers: [provideNativeDateAdapter()],
   templateUrl: './list-horario.component.html',
   styleUrl: './list-horario.component.scss'
 })
 export class ListHorarioComponent {
 
+  scheduledChangeDate = new FormControl('', [Validators.required]);
   list:Horario[] = []
+  selected:string="0"
 
   constructor(public dialog: MatDialog, private service:HorarioService){
     this.get()
+  }
+
+  onSubmit(){
+    console.log('Dia Cambiado')
   }
 
   get(){

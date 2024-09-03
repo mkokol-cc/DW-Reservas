@@ -15,6 +15,7 @@ import { Horario } from '../../../interfaces/horario';
   styleUrl: './edit-horario.component.scss'
 })
 export class EditHorarioComponent {
+  dayName:string[]=['domingo','lunes','martes','miércoles','jueves','viernes','sábado']
   form:FormGroup
   constructor(private fb: FormBuilder,@Inject(MAT_DIALOG_DATA) public data: Horario){
     this.form = this.fb.group({

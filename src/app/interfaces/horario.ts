@@ -3,4 +3,5 @@ export interface Horario {
     inicio:string,
     cierre:string,
     dia:number,//0-domingo 6-sabado
+    programado:string,
 }
