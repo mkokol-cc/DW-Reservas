@@ -1,1 +1,10 @@
-<canvas id="pie"></canvas>
+<mat-card>
+    <mat-card-title>Distribucion de Reservas</mat-card-title>
+    <mat-card-content>
+        <mat-radio-group [(ngModel)]="byServicio" (change)="radioChange($event)">
+            <mat-radio-button [value]="true">Servicios</mat-radio-button>
+            <mat-radio-button [value]="false">Recursos</mat-radio-button>
+        </mat-radio-group>
+        <canvas id="pie"></canvas>
+    </mat-card-content>
+</mat-card>
