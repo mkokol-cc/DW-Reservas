@@ -10,6 +10,7 @@ import { DialogConfirmComponent } from '../../../components/dialog-confirm/dialo
 import { Servicio } from '../../../interfaces/servicio';
 import {MatGridListModule} from '@angular/material/grid-list';
 import { ToastrService } from 'ngx-toastr';
+import { ServicioService } from '../../../services/servicio.service';
 
 @Component({
   selector: 'app-list-servicio',
@@ -20,72 +21,44 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class ListServicioComponent {
 
-  list:Servicio[] = [{
-    nombre:"Corte de Pelo",
-    duracion:30,
-    precio:5000.00,
-    precioMaximo:8000.00,
-    precioSenia:2000.00,
-    descripcion:"string",
-    eliminado:false,
-  },{
-    nombre:"Corte de Pelo y Barba",
-    duracion:30,
-    precio:5000.00,
-    precioMaximo:8000.00,
-    precioSenia:2000.00,
-    descripcion:"string",
-    eliminado:false,
-  },{
-    nombre:"Peinado Femenino",
-    duracion:30,
-    precio:5000.00,
-    precioMaximo:8000.00,
-    precioSenia:2000.00,
-    descripcion:"string",
-    eliminado:false,
-  },{
-    nombre:"Corte de Pelo Infantil",
-    duracion:30,
-    precio:5000.00,
-    precioMaximo:8000.00,
-    precioSenia:2000.00,
-    descripcion:"string",
-    eliminado:false,
-  }]
+  list:Servicio[]=[]
+  
+  constructor(public dialog: MatDialog, private service:ServicioService,private toastr: ToastrService) {
+    this.get()
+  }
 
-  constructor(public dialog: MatDialog, private toastr: ToastrService) {
-    this.orderList()
+  get(){
+    this.service.list().subscribe(result => {
+      this.list = result.sort((a, b) => a.nombre.localeCompare(b.nombre));
+    })
   }
 
   create() {
     const dialogRef = this.dialog.open(CreateServicioComponent);
     dialogRef.afterClosed().subscribe(result => {
-      console.log(`Dialog result: ${result}`);
+      //console.log(`Dialog result: ${result}`);
       if(result){
-        this.list.push(<Servicio>result)
-        this.orderList()
+        this.service.create(<Servicio>result).subscribe(result => {
+          this.get()
+        })
       }
     });
-  }
-
-  orderList(){
-    this.list.sort((a, b) => a.nombre.localeCompare(b.nombre));
   }
 
   delete(obj:Servicio) {
     const dialogRef = this.dialog.open(DialogConfirmComponent, {
       data: {
-        message: 'Vas a eliminar el recurso "'+obj.nombre+'".',
+        message: 'Vas a eliminar el servicio "'+obj.nombre+'".',
       },
     });
     dialogRef.afterClosed().subscribe(result => {
       //console.log('The dialog was closed');
       //this.animal = result;
       if(result){
-        this.toastr.success('Se elimino correctamente el servicio!','Genial!');
-        this.list = this.list.filter(servicio => servicio !== obj);
-        this.orderList()
+        //this.toastr.success('Se elimino correctamente el servicio!','Genial!');
+        this.service.delete(obj.id).subscribe(result => {
+          this.get()
+        })
       }
     });
   }
@@ -95,11 +68,11 @@ export class ListServicioComponent {
       data: obj
     });
     dialogRef.afterClosed().subscribe(result => {
-      console.log(`Dialog result: ${result}`);
+      //console.log(`Dialog result: ${result}`);
       if(result){
-        this.list = this.list.filter(servicio => servicio !== obj);
-        this.list.push(<Servicio>result)
-        this.orderList()
+        this.service.edit(<Servicio>result).subscribe(result => {
+          this.get()
+        })
       }
     });
   }

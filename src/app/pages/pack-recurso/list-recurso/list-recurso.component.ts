@@ -10,6 +10,7 @@ import { DialogConfirmComponent } from '../../../components/dialog-confirm/dialo
 import {MatGridListModule} from '@angular/material/grid-list';
 import { ToastrService } from 'ngx-toastr';
 import { Recurso } from '../../../interfaces/recurso';
+import { RecursoService } from '../../../services/recurso.service';
 
 @Component({
   selector: 'app-list-recurso',
@@ -20,41 +21,28 @@ import { Recurso } from '../../../interfaces/recurso';
 })
 export class ListRecursoComponent {
 
-  list:Recurso[] = [{
-    nombre:"Corte de Pelo",
-    descripcion:"string",
-    eliminado:false,
-  },{
-    nombre:"Corte de Pelo y Barba",
-    descripcion:"string",
-    eliminado:false,
-  },{
-    nombre:"Peinado Femenino",
-    descripcion:"string",
-    eliminado:false,
-  },{
-    nombre:"Corte de Pelo Infantil",
-    descripcion:"string",
-    eliminado:false,
-  }]
+  list:Recurso[]=[]
+  
+  constructor(public dialog: MatDialog, private service:RecursoService,private toastr: ToastrService) {
+    this.get()
+  }
 
-  constructor(public dialog: MatDialog, private toastr: ToastrService) {
-    this.orderList()
+  get(){
+    this.service.list().subscribe(result => {
+      this.list = result.sort((a, b) => a.nombre.localeCompare(b.nombre));
+    })
   }
 
   create() {
     const dialogRef = this.dialog.open(CreateRecursoComponent);
     dialogRef.afterClosed().subscribe(result => {
-      console.log(`Dialog result: ${result}`);
+      //console.log(`Dialog result: ${result}`);
       if(result){
-        this.list.push(<Recurso>result)
-        this.orderList()
+        this.service.create(<Recurso>result).subscribe(result => {
+          this.get()
+        })
       }
     });
-  }
-
-  orderList(){
-    this.list.sort((a, b) => a.nombre.localeCompare(b.nombre));
   }
 
   delete(obj:Recurso) {
@@ -67,9 +55,10 @@ export class ListRecursoComponent {
       //console.log('The dialog was closed');
       //this.animal = result;
       if(result){
-        this.toastr.success('Se elimino correctamente el recurso!','Genial!');
-        this.list = this.list.filter(recurso => recurso !== obj);
-        this.orderList()
+        //this.toastr.success('Se elimino correctamente el servicio!','Genial!');
+        this.service.delete(obj.id).subscribe(result => {
+          this.get()
+        })
       }
     });
   }
@@ -79,15 +68,13 @@ export class ListRecursoComponent {
       data: obj
     });
     dialogRef.afterClosed().subscribe(result => {
-      console.log(`Dialog result: ${result}`);
+      //console.log(`Dialog result: ${result}`);
       if(result){
-        this.list = this.list.filter(recurso => recurso !== obj);
-        this.list.push(<Recurso>result)
-        this.orderList()
+        this.service.edit(<Recurso>result).subscribe(result => {
+          this.get()
+        })
       }
     });
   }
-
-
 
 }
