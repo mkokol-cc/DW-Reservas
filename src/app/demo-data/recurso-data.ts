@@ -2,22 +2,22 @@ import { Recurso } from "../interfaces/recurso";
 
 export const RECURSOS:Recurso[] = [{
     id:1,
-    nombre:"Corte de Pelo",
+    nombre:"Peluquero Fede",
     descripcion:"string",
     eliminado:false,
   },{
     id:2,
-    nombre:"Corte de Pelo y Barba",
+    nombre:"Peluquera Mili",
     descripcion:"string",
     eliminado:false,
   },{
     id:3,
-    nombre:"Peinado Femenino",
+    nombre:"Peluquero Ema",
     descripcion:"string",
     eliminado:false,
   },{
     id:4,
-    nombre:"Corte de Pelo Infantil",
+    nombre:"Peluquera Pao",
     descripcion:"string",
     eliminado:false,
   }]
