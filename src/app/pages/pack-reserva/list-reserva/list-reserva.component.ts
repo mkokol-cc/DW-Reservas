@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, ViewChild} from '@angular/core';
+import {Component, ViewChild} from '@angular/core';
 import {MatPaginator, MatPaginatorModule} from '@angular/material/paginator';
 import {MatSort, MatSortModule} from '@angular/material/sort';
 import {MatTableDataSource, MatTableModule} from '@angular/material/table';
@@ -16,7 +16,7 @@ import { CommonModule } from '@angular/common';
   templateUrl: './list-reserva.component.html',
   styleUrl: './list-reserva.component.scss'
 })
-export class ListReservaComponent implements AfterViewInit {
+export class ListReservaComponent {
 
   list:Reserva[]=[]
   displayedColumns: string[] = ['id', 'cliente', 'fecha', 'estado', 'servicio', 'acciones'];
@@ -30,11 +30,6 @@ export class ListReservaComponent implements AfterViewInit {
     this.get()
     // Assign the data to the data source for the table to render
     //this.dataSource = new MatTableDataSource(users);
-  }
-
-  ngAfterViewInit() {
-    //this.dataSource.paginator = this.paginator;
-    //this.dataSource.sort = this.sort;
   }
 
   get(){

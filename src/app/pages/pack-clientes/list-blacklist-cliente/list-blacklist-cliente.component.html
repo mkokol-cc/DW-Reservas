@@ -1,1 +1,34 @@
-<p>list-blacklist-cliente works!</p>
+<mat-accordion>
+    <mat-expansion-panel>
+        <mat-expansion-panel-header>
+            <mat-panel-title>
+                Lista Negra
+            </mat-panel-title>
+        </mat-expansion-panel-header>
+
+        <mat-list>
+
+            @for (cliente of list; track cliente) {
+                @if(!cliente.habilitado){
+                    <mat-divider></mat-divider>
+                    <mat-list-item>
+                        <span matListItemTitle>{{cliente.telefono}}</span>
+                        <span matListItemLine>{{cliente.apellido}}, {{cliente.nombre}}</span>
+                        <div matListItemMeta>
+                            <button mat-icon-button color="primary" aria-label="Example icon button with a menu icon"><!--(click)="edit(cliente)"-->
+                                <mat-icon>edit</mat-icon>
+                            </button>
+                        </div>
+                    </mat-list-item>
+                }
+            }
+            <mat-divider></mat-divider>
+
+        </mat-list>
+
+        <div>
+            <p>Clientes en Lista Negra: {{list.length}}</p>
+        </div>
+
+    </mat-expansion-panel>
+</mat-accordion>

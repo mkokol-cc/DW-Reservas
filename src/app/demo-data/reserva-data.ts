@@ -9,7 +9,7 @@ function generateReservas(count: number): Reserva[] {
     const reservas: Reserva[] = [];
 
     for (let i = 0; i < count; i++) {
-      const cliente = getRandomItem(CLIENTES);
+      const cliente = getRandomCliente(CLIENTES);
       const recurso = getRandomItem(RECURSOS);
       const servicio = getRandomItem(SERVICIOS);
       const pago = getRandomPago();
@@ -42,6 +42,17 @@ function generateReservas(count: number): Reserva[] {
   // Selecciona un elemento aleatorio de un array
   function getRandomItem<T>(array: T[]): T {
     return array[Math.floor(Math.random() * array.length)];
+  }
+
+  // Selecciona un elemento aleatorio de un array
+  function getRandomCliente<Cliente>(array: Cliente[]): Cliente {
+    let isBlackList = true
+    let cliente:any = {}
+    while(isBlackList){
+      cliente = array[Math.floor(Math.random() * array.length)]
+      isBlackList = !cliente.habilitado
+    }
+    return cliente;
   }
 
   // Generar un número aleatorio entre min y max

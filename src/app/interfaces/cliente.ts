@@ -4,4 +4,5 @@ export interface Cliente {
     telefono: string,
     habilitado: boolean,
     cantidadReservas: number,
+    tieneReservaProxima: boolean,
 }

@@ -31,6 +31,11 @@ function getRandomHabilitado(): boolean {
   return Math.random() >= 0.05;  // probabilidad de ser true
 }
 
+// Función para generar el estado conReservaActiva al azar
+function getTieneReservaProxima(): boolean {
+  return Math.random() >= 0.35;  // probabilidad de ser true
+}
+
 function geometricRandom(p: number) {
   // Genera un número basado en una distribución geométrica
   let k = Math.ceil(Math.log(1 - Math.random()) / Math.log(1 - p));
@@ -46,8 +51,9 @@ function getRandomCliente(): Cliente {
   const telefono = getRandomPhoneNumber();
   const habilitado = getRandomHabilitado();
   const cantidadReservas = geometricRandom(0.3);
+  const tieneReservaProxima = getTieneReservaProxima();
 
-  return { nombre, apellido, telefono, habilitado, cantidadReservas};
+  return { nombre, apellido, telefono, habilitado, cantidadReservas, tieneReservaProxima};
 }
 
 
