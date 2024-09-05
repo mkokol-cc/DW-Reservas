@@ -1,11 +1,79 @@
 <p style="display: none;">{{list|json}}</p>
 
+<app-configuracion-recordatorios></app-configuracion-recordatorios>
+
 <mat-form-field>
-    <mat-label>Buscar</mat-label>
+    <mat-label>Buscar Por Cliente</mat-label>
     <input matInput (keyup)="applyFilter($event)" placeholder="Busqueda" #input>
 </mat-form-field>
-  
+
+<mat-form-field>
+  <mat-label>Servicio</mat-label>
+  <mat-select [(ngModel)]="selectedServicio">
+      <mat-option [value]="0">Todos</mat-option>
+      @for (servicio of listServicios; track servicio) {
+          <mat-option [value]="servicio.id">{{servicio.nombre}}</mat-option>
+      }
+  </mat-select>
+</mat-form-field>
+
+<mat-form-field>
+  <mat-label>Recurso</mat-label>
+  <mat-select [(ngModel)]="selectedRecurso">
+      <mat-option [value]="0">Todos</mat-option>
+      @for (recursos of listRecursos; track recursos) {
+          <mat-option [value]="recursos.id">{{recursos.nombre}}</mat-option>
+      }
+  </mat-select>
+</mat-form-field>
+
 <div class="mat-elevation-z8">
+
+  <div class="day-selector">
+    <button mat-icon-button aria-label="Example icon button with a home icon">
+      <mat-icon>chevron_left</mat-icon>
+    </button>
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title>Jueves</mat-card-title>
+        <mat-card-subtitle>16 Ago</mat-card-subtitle>
+      </mat-card-header>
+    </mat-card>
+    <mat-card class="selected-day">
+      <mat-card-header>
+        <mat-card-title>Viernes</mat-card-title>
+        <mat-card-subtitle>17 Ago</mat-card-subtitle>
+      </mat-card-header>
+    </mat-card>
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title>Sabado</mat-card-title>
+        <mat-card-subtitle>18 Ago</mat-card-subtitle>
+      </mat-card-header>
+    </mat-card>
+    <button mat-icon-button aria-label="Example icon button with a menu icon">
+      <mat-icon>chevron_right</mat-icon>
+    </button>
+    <mat-form-field>
+      <mat-label>Rango de Dias</mat-label>
+      <mat-date-range-input [formGroup]="dayRange" [rangePicker]="picker">
+        <input matStartDate formControlName="start" placeholder="Desde">
+        <input matEndDate formControlName="end" placeholder="Hasta">
+      </mat-date-range-input>
+      <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-date-range-picker #picker></mat-date-range-picker>
+    
+      @if (dayRange.controls.start.hasError('matStartDateInvalid')) {
+        <mat-error>Invalid start date</mat-error>
+      }
+      @if (dayRange.controls.end.hasError('matEndDateInvalid')) {
+        <mat-error>Invalid end date</mat-error>
+      }
+    </mat-form-field>
+    
+    <p>Selected range: {{dayRange.value | json}}</p>
+  </div>
+
     <table mat-table [dataSource]="dataSource" matSort>
   
       <ng-container matColumnDef="id">

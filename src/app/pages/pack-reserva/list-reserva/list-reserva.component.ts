@@ -7,12 +7,40 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import { Reserva } from '../../../interfaces/reserva';
 import { ReservaService } from '../../../services/reserva.service';
 import { CommonModule } from '@angular/common';
+import { ConfiguracionRecordatoriosComponent } from '../../../components/configuracion-recordatorios/configuracion-recordatorios.component';
+import { MatCardModule } from '@angular/material/card';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { FormGroup, FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { provideNativeDateAdapter } from '@angular/material/core';
+import { Recurso } from '../../../interfaces/recurso';
+import { Servicio } from '../../../interfaces/servicio';
+import { RecursoService } from '../../../services/recurso.service';
+import { ServicioService } from '../../../services/servicio.service';
+import { MatSelectModule } from '@angular/material/select';
 
 
 @Component({
   selector: 'app-list-reserva',
   standalone: true,
-  imports: [MatFormFieldModule, MatInputModule, MatTableModule, MatSortModule, MatPaginatorModule, CommonModule],
+  providers: [provideNativeDateAdapter()],
+  imports: [
+    MatFormFieldModule,
+    MatInputModule,
+    MatTableModule,
+    MatSortModule,
+    MatPaginatorModule,
+    CommonModule,
+    ConfiguracionRecordatoriosComponent,
+    MatCardModule ,
+    MatIconModule,
+    MatButtonModule,
+    MatDatepickerModule,
+    FormsModule, 
+    ReactiveFormsModule,
+    MatSelectModule
+  ],
   templateUrl: './list-reserva.component.html',
   styleUrl: './list-reserva.component.scss'
 })
@@ -21,15 +49,35 @@ export class ListReservaComponent {
   list:Reserva[]=[]
   displayedColumns: string[] = ['id', 'cliente', 'fecha', 'estado', 'servicio', 'acciones'];
   dataSource!: MatTableDataSource<Reserva>;
+  dayRange = new FormGroup({
+    start: new FormControl<Date | null>(null),
+    end: new FormControl<Date | null>(null),
+  });
+  listRecursos:Recurso[]=[]
+  listServicios:Servicio[]=[]
+  selectedRecurso:number=0
+  selectedServicio:number=0
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
-  constructor(private service:ReservaService) {
-    
+  constructor(private service:ReservaService, 
+    private recursoService:RecursoService, 
+    private servicioService:ServicioService) {
     this.get()
-    // Assign the data to the data source for the table to render
-    //this.dataSource = new MatTableDataSource(users);
+    this.getRecursos()
+    this.getServicios()
+  }
+
+  getRecursos(){
+    this.recursoService.list().subscribe(result => {
+      this.listRecursos = result.sort((a, b) => a.nombre.localeCompare(b.nombre));
+    })
+  }
+  getServicios(){
+    this.servicioService.list().subscribe(result => {
+      this.listServicios = result.sort((a, b) => a.nombre.localeCompare(b.nombre));
+    })
   }
 
   get(){
