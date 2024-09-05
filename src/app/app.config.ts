@@ -9,11 +9,12 @@ import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
 import { InMemoryDataService } from './services/in-memory-data.service';
 import { notificationsInterceptor } from './interceptors/notifications.interceptor';
 import { provideHttpClient, withInterceptors } from '@angular/common/http';
+import { loaderInterceptor } from './interceptors/loader.interceptor';
 
 export const appConfig: ApplicationConfig = {
   providers: [provideRouter(routes), provideAnimationsAsync(), provideToastr(), provideAnimations(),
 
-    provideHttpClient(withInterceptors([notificationsInterceptor])),
+    provideHttpClient(withInterceptors([loaderInterceptor,notificationsInterceptor])),
     importProvidersFrom(HttpClientInMemoryWebApiModule.forRoot(
       InMemoryDataService, { dataEncapsulation: false, delay: 1000 }
     )),//api fake con 1 segundo de delay

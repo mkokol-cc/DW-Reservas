@@ -7,6 +7,7 @@ import {MatSidenavModule} from '@angular/material/sidenav';
 import { SidenavMenuComponent } from '../../components/sidenav-menu/sidenav-menu.component';
 import { BuzonMenuComponent } from '../../components/buzon-menu/buzon-menu.component';
 import { PerfilMenuComponent } from '../../components/perfil-menu/perfil-menu.component';
+import { LoaderComponent } from '../../components/loader/loader.component';
 
 @Component({
   selector: 'app-dashboard',
@@ -19,7 +20,8 @@ import { PerfilMenuComponent } from '../../components/perfil-menu/perfil-menu.co
     MatSidenavModule,
     SidenavMenuComponent,
     BuzonMenuComponent,
-    PerfilMenuComponent
+    PerfilMenuComponent,
+    LoaderComponent
   ],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.scss'

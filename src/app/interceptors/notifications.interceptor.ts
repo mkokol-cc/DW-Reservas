@@ -1,11 +1,8 @@
 import { HttpInterceptorFn } from '@angular/common/http';
-//import { inject } from '@angular/core';
-//import { Router } from '@angular/router';
 import { tap, catchError, throwError } from 'rxjs';
 
 export const notificationsInterceptor: HttpInterceptorFn = (req, next) => {
   const apiUrl = ''
-  //const router = inject(Router)
   const routesToNotify: {
     url: string
     method: string
