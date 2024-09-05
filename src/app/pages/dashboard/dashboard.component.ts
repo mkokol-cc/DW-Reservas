@@ -5,11 +5,22 @@ import {MatToolbarModule} from '@angular/material/toolbar';
 import { RouterOutlet } from '@angular/router';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import { SidenavMenuComponent } from '../../components/sidenav-menu/sidenav-menu.component';
+import { BuzonMenuComponent } from '../../components/buzon-menu/buzon-menu.component';
+import { PerfilMenuComponent } from '../../components/perfil-menu/perfil-menu.component';
 
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-  imports: [MatToolbarModule, MatButtonModule, MatIconModule,RouterOutlet,MatSidenavModule, SidenavMenuComponent],
+  imports: [
+    MatToolbarModule,
+    MatButtonModule,
+    MatIconModule,
+    RouterOutlet,
+    MatSidenavModule,
+    SidenavMenuComponent,
+    BuzonMenuComponent,
+    PerfilMenuComponent
+  ],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.scss'
 })

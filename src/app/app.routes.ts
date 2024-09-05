@@ -12,6 +12,7 @@ export const routes: Routes = [
         {path: 'mi-negocio', loadComponent: () => import('./pages/section-analytics/section-analytics.component').then(m => m.SectionAnalyticsComponent), pathMatch: 'full'},
         {path: 'horarios', loadComponent: () => import('./pages/pack-horario/list-horario/list-horario.component').then(m => m.ListHorarioComponent), pathMatch: 'full'},
         {path: 'reservas', loadComponent: () => import('./pages/section-reservas/section-reservas.component').then(m => m.SectionReservasComponent), pathMatch: 'full'},
+        {path: 'perfil', loadComponent: () => import('./pages/section-perfil/section-perfil.component').then(m => m.SectionPerfilComponent), pathMatch: 'full'},
     ]},
 
     /*

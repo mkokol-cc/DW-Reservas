@@ -1,6 +1,7 @@
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
-import { Chart } from 'chart.js';
+import { Chart, registerables } from 'chart.js';
+Chart.register(...registerables);
 
 @Component({
   selector: 'app-analytics-historial-reservas',
@@ -9,19 +10,19 @@ import { Chart } from 'chart.js';
   templateUrl: './analytics-historial-reservas.component.html',
   styleUrl: './analytics-historial-reservas.component.scss'
 })
-export class AnalyticsHistorialReservasComponent {
+export class AnalyticsHistorialReservasComponent implements AfterViewInit{
 
   myChart!:Chart
-  @ViewChild('bar', {static: true}) chartRef:any;
   constructor(private elementRef: ElementRef){
+  }
+
+  ngAfterViewInit(){
     this.createChart()
   }
 
   createChart(){
-    //let htmlRef = this.elementRef.nativeElement.querySelector(`#bar`);
-    const canvas = document.getElementById('bar') as HTMLCanvasElement;
-    const htmlRef = canvas
-    this.myChart = new Chart(this.chartRef,{
+    let htmlRef = this.elementRef.nativeElement.querySelector(`#bar`);
+    this.myChart = new Chart(htmlRef, {
       type: 'bar',
       data: {
         labels: ['Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre'],
