@@ -19,6 +19,9 @@ import { Servicio } from '../../../interfaces/servicio';
 import { RecursoService } from '../../../services/recurso.service';
 import { ServicioService } from '../../../services/servicio.service';
 import { MatSelectModule } from '@angular/material/select';
+import { CreateRecursoComponent } from '../../pack-recurso/create-recurso/create-recurso.component';
+import { CreateReservaComponent } from '../create-reserva/create-reserva.component';
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 
 
 @Component({
@@ -39,7 +42,8 @@ import { MatSelectModule } from '@angular/material/select';
     MatDatepickerModule,
     FormsModule, 
     ReactiveFormsModule,
-    MatSelectModule
+    MatSelectModule,
+    MatDialogModule
   ],
   templateUrl: './list-reserva.component.html',
   styleUrl: './list-reserva.component.scss'
@@ -63,7 +67,8 @@ export class ListReservaComponent {
 
   constructor(private service:ReservaService, 
     private recursoService:RecursoService, 
-    private servicioService:ServicioService) {
+    private servicioService:ServicioService,
+    public dialog: MatDialog) {
     this.get()
     this.getRecursos()
     this.getServicios()
@@ -96,5 +101,17 @@ export class ListReservaComponent {
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
     }
+  }
+
+  create() {
+    const dialogRef = this.dialog.open(CreateReservaComponent);
+    dialogRef.afterClosed().subscribe(result => {
+      //console.log(`Dialog result: ${result}`);
+      if(result){/*
+        this.service.create(<Reserva>result).subscribe(result => {
+          this.get()
+        })*/
+      }
+    });
   }
 }
