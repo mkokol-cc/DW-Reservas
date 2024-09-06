@@ -75,12 +75,13 @@ export const HORARIOS: Horario[] = [
         dia:5,//0-domingo 6-sabado
         programado:"",
     },
-
     {
         id:11,
         inicio:"08:00",
         cierre:"12:00",
         dia:6,//0-domingo 6-sabado
         programado:"",
-    },
+    }
 ]
+
+
