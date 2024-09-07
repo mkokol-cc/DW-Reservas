@@ -32,28 +32,28 @@
 <div class="mat-elevation-z8">
 
   <div class="day-selector">
-    <button mat-icon-button aria-label="Example icon button with a home icon">
+    <button mat-icon-button (click)="filterByDay(prevDay(daySelected))">
       <mat-icon>chevron_left</mat-icon>
     </button>
     <mat-card>
-      <mat-card-header>
-        <mat-card-title>Jueves</mat-card-title>
-        <mat-card-subtitle>16 Ago</mat-card-subtitle>
+      <mat-card-header (click)="filterByDay(prevDay(daySelected))">
+        <mat-card-title>{{ DAY_NAMES[prevDay(daySelected).getDay()] }}</mat-card-title>
+        <mat-card-subtitle>{{ prevDay(daySelected) | date:'d \'de\' MMM':'es-ES'}}</mat-card-subtitle>
       </mat-card-header>
     </mat-card>
     <mat-card class="selected-day">
       <mat-card-header>
-        <mat-card-title>Viernes</mat-card-title>
-        <mat-card-subtitle>17 Ago</mat-card-subtitle>
+        <mat-card-title>{{ DAY_NAMES[daySelected.getDay()] }}</mat-card-title>
+        <mat-card-subtitle>{{ daySelected | date:'d \'de\' MMM':'es-ES'}}</mat-card-subtitle>
       </mat-card-header>
     </mat-card>
     <mat-card>
-      <mat-card-header>
-        <mat-card-title>Sabado</mat-card-title>
-        <mat-card-subtitle>18 Ago</mat-card-subtitle>
+      <mat-card-header (click)="filterByDay(nextDay(daySelected))">
+        <mat-card-title>{{ DAY_NAMES[nextDay(daySelected).getDay()] }}</mat-card-title>
+        <mat-card-subtitle>{{ nextDay(daySelected) | date:'d \'de\' MMM':'es-ES'}}</mat-card-subtitle>
       </mat-card-header>
     </mat-card>
-    <button mat-icon-button aria-label="Example icon button with a menu icon">
+    <button mat-icon-button (click)="filterByDay(nextDay(daySelected))">
       <mat-icon>chevron_right</mat-icon>
     </button>
     <mat-form-field>
@@ -73,7 +73,7 @@
       }
     </mat-form-field>
     
-    <p>Selected range: {{dayRange.value | json}}</p>
+    <p>Filtrando: {{dayRange.value | json}}</p>
   </div>
 
     <table mat-table [dataSource]="dataSource" matSort>

@@ -1,4 +1,4 @@
-import {Component, ViewChild} from '@angular/core';
+import {Component, LOCALE_ID, ViewChild} from '@angular/core';
 import {MatPaginator, MatPaginatorModule} from '@angular/material/paginator';
 import {MatSort, MatSortModule} from '@angular/material/sort';
 import {MatTableDataSource, MatTableModule} from '@angular/material/table';
@@ -6,7 +6,7 @@ import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import { Reserva } from '../../../interfaces/reserva';
 import { ReservaService } from '../../../services/reserva.service';
-import { CommonModule } from '@angular/common';
+import { CommonModule, registerLocaleData } from '@angular/common';
 import { ConfiguracionRecordatoriosComponent } from '../../../components/configuracion-recordatorios/configuracion-recordatorios.component';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
@@ -22,12 +22,13 @@ import { MatSelectModule } from '@angular/material/select';
 import { CreateRecursoComponent } from '../../pack-recurso/create-recurso/create-recurso.component';
 import { CreateReservaComponent } from '../create-reserva/create-reserva.component';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
+import localeEs from '@angular/common/locales/es';
 
-
+registerLocaleData(localeEs);
 @Component({
   selector: 'app-list-reserva',
   standalone: true,
-  providers: [provideNativeDateAdapter()],
+  providers: [provideNativeDateAdapter(),{ provide: LOCALE_ID, useValue: 'es-ES' }],
   imports: [
     MatFormFieldModule,
     MatInputModule,
@@ -50,12 +51,15 @@ import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 })
 export class ListReservaComponent {
 
+  DAY_NAMES = ['Dom', 'Lun', 'Mar', 'Mie', 'Jue', 'Vie', 'Sab'];
+  daySelected:Date = new Date()
+
   list:Reserva[]=[]
   displayedColumns: string[] = ['id', 'cliente', 'fecha', 'estado', 'servicio', 'acciones'];
   dataSource!: MatTableDataSource<Reserva>;
   dayRange = new FormGroup({
-    start: new FormControl<Date | null>(null),
-    end: new FormControl<Date | null>(null),
+    start: new FormControl<Date | null>(this.daySelected),
+    end: new FormControl<Date | null>(this.daySelected),
   });
   listRecursos:Recurso[]=[]
   listServicios:Servicio[]=[]
@@ -106,13 +110,28 @@ export class ListReservaComponent {
   create() {
     const dialogRef = this.dialog.open(CreateReservaComponent);
     dialogRef.afterClosed().subscribe(result => {
-      //console.log(`Dialog result: ${result}`);
-      console.log(result)
-      if(result){/*
+      if(result){
         this.service.create(<Reserva>result).subscribe(result => {
           this.get()
-        })*/
+        })
       }
     });
+  }
+
+
+  filterByDay(day:Date){
+    this.daySelected = day
+    this.dayRange.get('start')?.patchValue(day)// = day
+    this.dayRange.get('end')?.patchValue(day)
+  }
+  nextDay(date:Date):Date{
+    const nextDay = new Date()
+    nextDay.setDate(date.getDate() + 1)
+    return nextDay
+  }
+  prevDay(date:Date):Date{
+    const prevDay = new Date()
+    prevDay.setDate(date.getDate() - 1)
+    return prevDay
   }
 }
