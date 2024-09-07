@@ -13,6 +13,9 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { provideNativeDateAdapter } from '@angular/material/core';
+import { Cliente } from '../../../interfaces/cliente';
+import { Horario } from '../../../interfaces/horario';
+import { HORARIOS } from '../../../demo-data/horario-data';
 
 @Component({
   selector: 'app-create-reserva',
@@ -38,6 +41,8 @@ export class CreateReservaComponent {
   listServicios:Servicio[]=[]
   selectedRecurso:number=0
   selectedServicio:number=0
+
+  listHorarios:Horario[]=HORARIOS
 
   form!:FormGroup
 
@@ -78,5 +83,66 @@ export class CreateReservaComponent {
     })
   }
 
-  onSubmit(){}
+  getHorarioDisponibles(){
+    const dateSeleccionado = new Date(this.form.get('dia')?.value);
+    const horariosDelDia = this.listHorarios.filter(h => h.dia == dateSeleccionado.getDay())
+    this.listDisponibles = []
+    horariosDelDia.forEach(h => {
+      this.generarHorasEnIntervalos(h.inicio,h.cierre).forEach(hora=>{
+        this.listDisponibles.push(hora)
+      })
+    })
+  }
+  generarHorasEnIntervalos(horaInicio: string, horaFin: string): string[] {
+    const resultado: string[] = [];
+  
+    // Convertir los strings a Date para manipular los tiempos
+    let [horaIni, minutoIni] = horaInicio.split(":").map(Number);
+    let [horaFinH, minutoFin] = horaFin.split(":").map(Number);
+  
+    // Crear objetos Date
+    let inicio = new Date();
+    inicio.setHours(horaIni, minutoIni, 0, 0);  // Establecer la hora y minutos de inicio
+  
+    let fin = new Date();
+    fin.setHours(horaFinH, minutoFin, 0, 0);    // Establecer la hora y minutos de fin
+  
+    // Iterar en intervalos de 30 minutos
+    while (inicio < fin) {
+      // Agregar la hora actual en formato HH:mm al resultado
+      let horas = inicio.getHours().toString().padStart(2, '0');
+      let minutos = inicio.getMinutes().toString().padStart(2, '0');
+      resultado.push(`${horas}:${minutos}`);
+  
+      // Sumar 30 minutos
+      inicio.setMinutes(inicio.getMinutes() + 30);
+    }
+
+    console.log(resultado)
+  
+    return resultado;
+  }
+
+  onSubmit():Reserva|undefined{
+    if(this.form.valid){
+      const cliente:any = <Cliente>{
+        nombre: this.form.get('nombreCliente')?.value,
+        apellido: this.form.get('apellidoCliente')?.value,
+        telefono: this.form.get('telefonoCliente')?.value,
+      }
+      const recElegido = this.listRecursos.find(obj => obj.id == this.form.get('recurso')?.value)
+      const servElegido = this.listServicios.find(obj => obj.id == this.form.get('servicio')?.value)
+      return <Reserva>{
+        servicio:servElegido,
+        recurso:recElegido,
+        cliente: cliente,
+        precio: servElegido?.precio,
+        precioSenia: servElegido?.precioSenia,
+        fechahora: this.form.get('dia')?.value + this.form.get('hora')?.value,
+        cancelado: false
+      }
+    }
+    return undefined
+  }
+  
 }

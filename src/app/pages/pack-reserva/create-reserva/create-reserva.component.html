@@ -24,7 +24,7 @@
 
         <mat-form-field>
             <mat-label>Fecha</mat-label>
-            <input matInput [matDatepicker]="picker" formControlName="dia">
+            <input matInput [matDatepicker]="picker" formControlName="dia" (dateChange)="getHorarioDisponibles()">
             <mat-hint>MM/DD/YYYY</mat-hint>
             <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
             <mat-datepicker #picker></mat-datepicker>
@@ -66,7 +66,7 @@
             }
         </mat-form-field>
 
-        <button mat-flat-button color="primary" type="submit" [disabled]="form.invalid" [mat-dialog-close]="form.value">Guardar</button>
+        <button mat-flat-button color="primary" type="submit" [disabled]="form.invalid" [mat-dialog-close]="onSubmit()">Guardar</button>
 
     </form>
 </mat-dialog-content>

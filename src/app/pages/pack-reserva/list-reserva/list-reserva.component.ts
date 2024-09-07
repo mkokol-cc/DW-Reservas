@@ -107,6 +107,7 @@ export class ListReservaComponent {
     const dialogRef = this.dialog.open(CreateReservaComponent);
     dialogRef.afterClosed().subscribe(result => {
       //console.log(`Dialog result: ${result}`);
+      console.log(result)
       if(result){/*
         this.service.create(<Reserva>result).subscribe(result => {
           this.get()
