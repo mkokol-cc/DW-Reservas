@@ -11,11 +11,14 @@ import {MatGridListModule} from '@angular/material/grid-list';
 import { ToastrService } from 'ngx-toastr';
 import { Recurso } from '../../../interfaces/recurso';
 import { RecursoService } from '../../../services/recurso.service';
+import { MatCardModule } from '@angular/material/card';
 
 @Component({
   selector: 'app-list-recurso',
   standalone: true,
-  imports: [MatButtonModule,MatIconModule,MatExpansionModule,MatListModule,MatDialogModule,MatGridListModule],
+  imports: [MatButtonModule,MatIconModule,MatExpansionModule,MatListModule,MatDialogModule,MatGridListModule,
+    MatCardModule
+  ],
   templateUrl: './list-recurso.component.html',
   styleUrl: './list-recurso.component.scss'
 })

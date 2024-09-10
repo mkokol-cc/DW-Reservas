@@ -1,11 +1,8 @@
-<mat-accordion>
-    <mat-expansion-panel>
-        <mat-expansion-panel-header>
-            <mat-panel-title>
-                Recursos
-            </mat-panel-title>
-        </mat-expansion-panel-header>
-
+<mat-card>
+    <mat-card-header>
+        <mat-card-title>Recursos</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
         <mat-list>
 
             @for (recurso of list; track recurso) {
@@ -28,8 +25,10 @@
             <mat-divider></mat-divider>
 
         </mat-list>
+    </mat-card-content>
 
-        <div style="display: flex;align-items: center;justify-content: space-between;">
+    <mat-card-actions>
+        <div style="width: 100% ;display: flex;align-items: center;justify-content: space-between;">
             <div>
                 <p>Recursos Registrados: {{list.length}}</p>
             </div>
@@ -37,6 +36,5 @@
                 <button mat-flat-button color="primary" (click)="create()">Nuevo</button>
             </div>
         </div>
-
-    </mat-expansion-panel>
-</mat-accordion>
+    </mat-card-actions>
+</mat-card>

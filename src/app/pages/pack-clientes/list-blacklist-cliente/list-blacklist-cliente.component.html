@@ -1,11 +1,8 @@
-<mat-accordion>
-    <mat-expansion-panel>
-        <mat-expansion-panel-header>
-            <mat-panel-title>
-                Lista Negra
-            </mat-panel-title>
-        </mat-expansion-panel-header>
-
+<mat-card>
+    <mat-card-header>
+        <mat-card-title>Lista Negra</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
         <mat-list>
 
             @for (cliente of list; track cliente) {
@@ -23,13 +20,17 @@
                     </mat-list-item>
                 }
             }
+
             <mat-divider></mat-divider>
 
         </mat-list>
+    </mat-card-content>
 
-        <div>
-            <p>Clientes en Lista Negra: {{list.length}}</p>
+    <mat-card-actions>
+        <div style="width: 100% ;display: flex;align-items: center;justify-content: space-between;">
+            <div>
+                <p style="text-align:center">Clientes en Lista Negra: {{list.length}}</p>
+            </div>
         </div>
-
-    </mat-expansion-panel>
-</mat-accordion>
+    </mat-card-actions>
+</mat-card>
