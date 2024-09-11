@@ -18,8 +18,8 @@ export class ClienteService {
   create(object: Cliente): Observable<Cliente> {
     return this.http.post<Cliente>(this.url, object)
   }
-  edit(object: Cliente){
-    return this.http.put<Cliente>(this.url, object)
+  edit(id:number,object: Cliente){
+    return this.http.put<Cliente>(this.url+'/'+id, object)
   }
 
 }

@@ -45,7 +45,7 @@ function geometricRandom(p: number) {
 }
 
 // Función para generar un cliente aleatorio
-function getRandomCliente(): Cliente {
+function getRandomCliente(id:number): Cliente {
   const nombre = nombresPila[Math.floor(Math.random() * nombresPila.length)];
   const apellido = apellidos[Math.floor(Math.random() * apellidos.length)];
   const telefono = getRandomPhoneNumber();
@@ -53,7 +53,7 @@ function getRandomCliente(): Cliente {
   const cantidadReservas = geometricRandom(0.3);
   const tieneReservaProxima = getTieneReservaProxima();
 
-  return { nombre, apellido, telefono, habilitado, cantidadReservas, tieneReservaProxima};
+  return { id,nombre, apellido, telefono, habilitado, cantidadReservas, tieneReservaProxima};
 }
 
 
@@ -61,7 +61,7 @@ function getRandomCliente(): Cliente {
 function generateRandomClientes(count: number): Cliente[] {
   const clientes: Cliente[] = [];
   for (let i = 0; i < count; i++) {
-    clientes.push(getRandomCliente());
+    clientes.push(getRandomCliente((i+1)));
   }
   return clientes;
 }

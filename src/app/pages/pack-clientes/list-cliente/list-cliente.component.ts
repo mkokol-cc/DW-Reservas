@@ -8,12 +8,16 @@ import { MatSort, MatSortModule } from '@angular/material/sort';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatCardModule } from '@angular/material/card';
+import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
+import { DialogConfirmComponent } from '../../../components/dialog-confirm/dialog-confirm.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-list-cliente',
   standalone: true,
   imports: [MatFormFieldModule, MatInputModule, MatTableModule, MatSortModule, MatPaginatorModule,CommonModule,
-    MatCardModule
+    MatCardModule, MatIconModule, MatButtonModule
   ],
   templateUrl: './list-cliente.component.html',
   styleUrl: './list-cliente.component.scss'
@@ -27,7 +31,7 @@ export class ListClienteComponent {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
-  constructor( private service:ClienteService){
+  constructor( private service:ClienteService , public dialog: MatDialog){
     this.get()
   }
 
@@ -38,6 +42,22 @@ export class ListClienteComponent {
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
     })
+  }
+
+  toBlackList(cliente:Cliente){
+    const dialogRef = this.dialog.open(DialogConfirmComponent, {
+      data: {
+        message: 'Vas a enviar al cliente '+cliente.apellido+', '+cliente.nombre+' a la lista negra.',
+      },
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      if(result){
+        cliente.habilitado = false
+        this.service.edit(cliente.id,cliente).subscribe(result => {
+          this.get()
+        })
+      }
+    });
   }
 
   applyFilter(event: Event) {
