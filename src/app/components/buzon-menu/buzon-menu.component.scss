@@ -1,0 +1,14 @@
+div.notification{
+    padding-top: 15px;
+    padding-bottom: 15px;
+}
+div.notification div.content p{
+    margin: 0;
+}
+div.notification div.content p.title{
+    font-weight: bold;
+}
+div.notification div.content p.subtitle{
+    color: #686868;
+    font-size: 0.8em;
+}

@@ -2,16 +2,27 @@
     <mat-icon matBadge="6" matBadgeColor="warn">notifications_active</mat-icon>
 </button>
 <mat-menu #menu="matMenu">
-    <button mat-menu-item>
-      <mat-icon>dialpad</mat-icon>
-      <span>Redial</span>
-    </button>
-    <button mat-menu-item disabled>
-      <mat-icon>voicemail</mat-icon>
-      <span>Check voice mail</span>
-    </button>
-    <button mat-menu-item>
-      <mat-icon>notifications_off</mat-icon>
-      <span>Disable alerts</span>
-    </button>
+    <div mat-menu-item class="notification">
+      <mat-icon>list_alt_add</mat-icon>
+      <div class="content">
+        <p class="title">Nueva Reserva!</p>
+        <p class="subtitle">(13:00)</p>
+      </div>
+    </div>
+    <mat-divider></mat-divider>
+    <div mat-menu-item class="notification">
+      <mat-icon>list_alt_add</mat-icon>
+      <div class="content">
+        <p class="title">Nueva Reserva!</p>
+        <p class="subtitle">(13:00)</p>
+      </div>
+    </div>
+    <mat-divider></mat-divider>
+    <div mat-menu-item class="notification">
+      <mat-icon>list_alt_add</mat-icon>
+      <div class="content">
+        <p class="title">Nueva Reserva!</p>
+        <p class="subtitle">(13:00)</p>
+      </div>
+    </div>
 </mat-menu>
