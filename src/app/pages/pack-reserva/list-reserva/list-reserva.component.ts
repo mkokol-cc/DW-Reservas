@@ -54,7 +54,8 @@ registerLocaleData(localeEs);
     FormsModule, 
     ReactiveFormsModule,
     MatSelectModule,
-    MatDialogModule,MatChipsModule
+    MatDialogModule,MatChipsModule,
+    MatCardModule
   ],
   templateUrl: './list-reserva.component.html',
   styleUrl: './list-reserva.component.scss'
