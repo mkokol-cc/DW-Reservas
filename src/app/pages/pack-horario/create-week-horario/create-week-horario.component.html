@@ -1,0 +1,222 @@
+<p style="display: none;">{{list|json}}</p>
+
+<p>{{programadoToEdit}}</p>
+<mat-list>
+    
+    <form (ngSubmit)="onSubmit()">
+        <p>Cualquier cambio en los horarios sera programado para la fecha seleccionada. las reservas posteriores a ese dia que no cumplan con los nuevos horarios seran canceladas.</p>
+        <mat-form-field>
+            <mat-label>Aplicar cambios el dia</mat-label>
+            <input matInput [matDatepicker]="picker" [formControl]="scheduledChangeDate">
+            <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker touchUi #picker></mat-datepicker>
+        </mat-form-field>
+        <button mat-flat-button color="primary" type="submit" [disabled]="scheduledChangeDate.invalid">Editar</button>
+    </form>
+
+    <mat-divider></mat-divider>
+    <mat-list-item [lines]="3">
+        <span matListItemTitle>Lunes</span>
+        <span matListItemLine>
+            @for (horario of list; track horario) {
+                @if (horario.dia==1){
+                    @if (horario.inicio && horario.cierre){
+                        <mat-chip-row (click)="edit(horario)">
+                            {{horario.inicio}}-{{horario.cierre}}
+                            <button matChipRemove (click)="delete(horario.id)">
+                              <mat-icon>cancel</mat-icon>
+                            </button>
+                        </mat-chip-row>
+                    }
+                    @else {
+                        <mat-chip-row>
+                            Cerrado
+                        </mat-chip-row>
+                    }
+                }
+            }
+        </span>
+        <div matListItemMeta>
+            <button mat-icon-button color="primary" aria-label="Example icon button with a menu icon" (click)="create(1)">
+                <mat-icon>add_circle</mat-icon>
+            </button>
+        </div>
+    </mat-list-item>
+
+    <mat-divider></mat-divider>
+    <mat-list-item [lines]="3">
+        <span matListItemTitle>Martes</span>
+        <span matListItemLine>
+            @for (horario of list; track horario) {
+                @if (horario.dia==2){
+                    @if (horario.inicio && horario.cierre){
+                        <mat-chip-row (click)="edit(horario)">
+                            {{horario.inicio}}-{{horario.cierre}}
+                            <button matChipRemove (click)="delete(horario.id)">
+                              <mat-icon>cancel</mat-icon>
+                            </button>
+                        </mat-chip-row>
+                    }
+                    @else {
+                        <mat-chip-row>
+                            Cerrado
+                        </mat-chip-row>
+                    }
+                }
+            }
+        </span>
+        <div matListItemMeta>
+            <button mat-icon-button color="primary" aria-label="Example icon button with a menu icon" (click)="create(2)">
+                <mat-icon>add_circle</mat-icon>
+            </button>
+        </div>
+    </mat-list-item>
+
+    <mat-divider></mat-divider>
+    <mat-list-item [lines]="3">
+        <span matListItemTitle>Miercoles</span>
+        <span matListItemLine>
+            @for (horario of list; track horario) {
+                @if (horario.dia==3){
+                    @if (horario.inicio && horario.cierre){
+                        <mat-chip-row (click)="edit(horario)">
+                            {{horario.inicio}}-{{horario.cierre}}
+                            <button matChipRemove (click)="delete(horario.id)">
+                              <mat-icon>cancel</mat-icon>
+                            </button>
+                        </mat-chip-row>
+                    }
+                    @else {
+                        <mat-chip-row>
+                            Cerrado
+                        </mat-chip-row>
+                    }
+                }
+            }
+        </span>
+        <div matListItemMeta>
+            <button mat-icon-button color="primary" aria-label="Example icon button with a menu icon" (click)="create(3)">
+                <mat-icon>add_circle</mat-icon>
+            </button>
+        </div>
+    </mat-list-item>
+
+    <mat-divider></mat-divider>
+    <mat-list-item [lines]="3">
+        <span matListItemTitle>Jueves</span>
+        <span matListItemLine>
+            @for (horario of list; track horario) {
+                @if (horario.dia==4){
+                    @if (horario.inicio && horario.cierre){
+                        <mat-chip-row (click)="edit(horario)">
+                            {{horario.inicio}}-{{horario.cierre}}
+                            <button matChipRemove (click)="delete(horario.id)">
+                              <mat-icon>cancel</mat-icon>
+                            </button>
+                        </mat-chip-row>
+                    }
+                    @else {
+                        <mat-chip-row>
+                            Cerrado
+                        </mat-chip-row>
+                    }
+                }
+            }
+        </span>
+        <div matListItemMeta>
+            <button mat-icon-button color="primary" aria-label="Example icon button with a menu icon" (click)="create(4)">
+                <mat-icon>add_circle</mat-icon>
+            </button>
+        </div>
+    </mat-list-item>
+
+    <mat-divider></mat-divider>
+    <mat-list-item [lines]="3">
+        <span matListItemTitle>Viernes</span>
+        <span matListItemLine>
+            @for (horario of list; track horario) {
+                @if (horario.dia==5){
+                    @if (horario.inicio && horario.cierre){
+                        <mat-chip-row (click)="edit(horario)">
+                            {{horario.inicio}}-{{horario.cierre}}
+                            <button matChipRemove (click)="delete(horario.id)">
+                              <mat-icon>cancel</mat-icon>
+                            </button>
+                        </mat-chip-row>
+                    }
+                    @else {
+                        <mat-chip-row>
+                            Cerrado
+                        </mat-chip-row>
+                    }
+                }
+            }
+        </span>
+        <div matListItemMeta>
+            <button mat-icon-button color="primary" aria-label="Example icon button with a menu icon" (click)="create(5)">
+                <mat-icon>add_circle</mat-icon>
+            </button>
+        </div>
+    </mat-list-item>
+
+    <mat-divider></mat-divider>
+    <mat-list-item [lines]="3">
+        <span matListItemTitle>Sabado</span>
+        <span matListItemLine>
+            @for (horario of list; track horario) {
+                @if (horario.dia==6){
+                    @if (horario.inicio && horario.cierre){
+                        <mat-chip-row (click)="edit(horario)">
+                            {{horario.inicio}}-{{horario.cierre}}
+                            <button matChipRemove (click)="delete(horario.id)">
+                              <mat-icon>cancel</mat-icon>
+                            </button>
+                        </mat-chip-row>
+                    }
+                    @else {
+                        <mat-chip-row>
+                            Cerrado
+                        </mat-chip-row>
+                    }
+                }
+            }
+        </span>
+        <div matListItemMeta>
+            <button mat-icon-button color="primary" aria-label="Example icon button with a menu icon" (click)="create(6)">
+                <mat-icon>add_circle</mat-icon>
+            </button>
+        </div>
+    </mat-list-item>
+
+    <mat-divider></mat-divider>
+    <mat-list-item [lines]="3">
+        <span matListItemTitle>Domingo</span>
+        <span matListItemLine>
+            @for (horario of list; track horario) {
+                @if (horario.dia==0){
+                    @if (horario.inicio && horario.cierre){
+                        <mat-chip-row (click)="edit(horario)">
+                            {{horario.inicio}}-{{horario.cierre}}
+                            <button matChipRemove (click)="delete(horario.id)">
+                              <mat-icon>cancel</mat-icon>
+                            </button>
+                        </mat-chip-row>
+                    }
+                    @else {
+                        <mat-chip-row>
+                            Cerrado
+                        </mat-chip-row>
+                    }
+                }
+            }
+        </span>
+        <div matListItemMeta>
+            <button mat-icon-button color="primary" aria-label="Example icon button with a menu icon" (click)="create(0)">
+                <mat-icon>add_circle</mat-icon>
+            </button>
+        </div>
+    </mat-list-item>
+
+    <mat-divider></mat-divider>
+
+</mat-list>

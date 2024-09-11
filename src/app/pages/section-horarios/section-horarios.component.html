@@ -1,0 +1,25 @@
+<div class="grid-container">
+    <div class="item1">
+        <mat-card>
+            <mat-card-header>
+                <mat-card-title>
+                    Mis Horarios
+                </mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+                <mat-tab-group [selectedIndex]="selected.value"
+                (selectedIndexChange)="selected.setValue($event)">
+                    <mat-tab label="Horarios Guardados">
+                        <app-list-week-horario (programadoToEdit)="reciveProgramadoToEdit($event)"></app-list-week-horario>
+                    </mat-tab>
+                    <mat-tab label="Nuevo Horario">
+                        <app-create-week-horario [programadoToEdit]="programadoToEdit"></app-create-week-horario>
+                    </mat-tab>
+                </mat-tab-group>
+            </mat-card-content>
+        </mat-card>
+    </div>
+    <div class="item2">
+        
+    </div>
+</div>

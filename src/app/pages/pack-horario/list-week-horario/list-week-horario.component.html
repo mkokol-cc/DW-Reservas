@@ -1,0 +1,170 @@
+<p style="display: none;">{{list|json}}</p>
+
+<mat-list>
+    <div>
+        <mat-form-field>
+            <mat-label>Horarios</mat-label>
+            <mat-select [(ngModel)]="selected" name="select-horario">
+                @for (keypar of agrupadosPorProgramado|keyvalue; track keypar.key) {
+                    @if(keypar.key != ""){
+                        <mat-option [value]="keypar.key">Programado Para: {{keypar.key}}</mat-option>
+                    }
+                    @else{
+                        <mat-option [value]="keypar.key">Actual</mat-option>
+                    }
+                }
+            </mat-select>
+        </mat-form-field>
+        <button mat-flat-button color="primary" type="button" (click)="edit()">Editar</button>
+    </div>
+
+    <mat-divider></mat-divider>
+    <mat-list-item [lines]="3">
+        <span matListItemTitle>Lunes</span>
+        <span matListItemLine>
+            @for (horario of list; track horario) {
+                @if (horario.programado==selected && horario.dia==1){
+                    @if (horario.inicio && horario.cierre){
+                        <mat-chip-row>
+                            {{horario.inicio}}-{{horario.cierre}}
+                        </mat-chip-row>
+                    }
+                    @else {
+                        <mat-chip-row>
+                            Cerrado
+                        </mat-chip-row>
+                    }
+                }
+            }
+        </span>
+    </mat-list-item>
+
+    <mat-divider></mat-divider>
+    <mat-list-item [lines]="3">
+        <span matListItemTitle>Martes</span>
+        <span matListItemLine>
+            @for (horario of list; track horario) {
+                @if (horario.programado==selected && horario.dia==2){
+                    @if (horario.inicio && horario.cierre){
+                        <mat-chip-row>
+                            {{horario.inicio}}-{{horario.cierre}}
+                        </mat-chip-row>
+                    }
+                    @else {
+                        <mat-chip-row>
+                            Cerrado
+                        </mat-chip-row>
+                    }
+                }
+            }
+        </span>
+    </mat-list-item>
+
+    <mat-divider></mat-divider>
+    <mat-list-item [lines]="3">
+        <span matListItemTitle>Miercoles</span>
+        <span matListItemLine>
+            @for (horario of list; track horario) {
+                @if (horario.programado==selected && horario.dia==3){
+                    @if (horario.inicio && horario.cierre){
+                        <mat-chip-row>
+                            {{horario.inicio}}-{{horario.cierre}}
+                        </mat-chip-row>
+                    }
+                    @else {
+                        <mat-chip-row>
+                            Cerrado
+                        </mat-chip-row>
+                    }
+                }
+            }
+        </span>
+    </mat-list-item>
+
+    <mat-divider></mat-divider>
+    <mat-list-item [lines]="3">
+        <span matListItemTitle>Jueves</span>
+        <span matListItemLine>
+            @for (horario of list; track horario) {
+                @if (horario.programado==selected && horario.dia==4){
+                    @if (horario.inicio && horario.cierre){
+                        <mat-chip-row>
+                            {{horario.inicio}}-{{horario.cierre}}
+                        </mat-chip-row>
+                    }
+                    @else {
+                        <mat-chip-row>
+                            Cerrado
+                        </mat-chip-row>
+                    }
+                }
+            }
+        </span>
+    </mat-list-item>
+
+    <mat-divider></mat-divider>
+    <mat-list-item [lines]="3">
+        <span matListItemTitle>Viernes</span>
+        <span matListItemLine>
+            @for (horario of list; track horario) {
+                @if (horario.programado==selected && horario.dia==5){
+                    @if (horario.inicio && horario.cierre){
+                        <mat-chip-row>
+                            {{horario.inicio}}-{{horario.cierre}}
+                        </mat-chip-row>
+                    }
+                    @else {
+                        <mat-chip-row>
+                            Cerrado
+                        </mat-chip-row>
+                    }
+                }
+            }
+        </span>
+    </mat-list-item>
+
+    <mat-divider></mat-divider>
+    <mat-list-item [lines]="3">
+        <span matListItemTitle>Sabado</span>
+        <span matListItemLine>
+            @for (horario of list; track horario) {
+                @if (horario.programado==selected && horario.dia==6){
+                    @if (horario.inicio && horario.cierre){
+                        <mat-chip-row>
+                            {{horario.inicio}}-{{horario.cierre}}
+                        </mat-chip-row>
+                    }
+                    @else {
+                        <mat-chip-row>
+                            Cerrado
+                        </mat-chip-row>
+                    }
+                }
+            }
+        </span>
+    </mat-list-item>
+
+    <mat-divider></mat-divider>
+    <mat-list-item [lines]="3">
+        <span matListItemTitle>Domingo</span>
+        <span matListItemLine>
+            @for (horario of list; track horario) {
+                @if (horario.programado==selected && horario.dia==0){
+                    @if (horario.inicio && horario.cierre){
+                        <mat-chip-row>
+                            {{horario.inicio}}-{{horario.cierre}}
+                        </mat-chip-row>
+                    }
+                    @else {
+                        <mat-chip-row>
+                            Cerrado
+                        </mat-chip-row>
+                    }
+                }
+            }
+        </span>
+    </mat-list-item>
+
+    <mat-divider></mat-divider>
+
+</mat-list>
