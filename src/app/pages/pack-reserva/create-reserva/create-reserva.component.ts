@@ -132,13 +132,17 @@ export class CreateReservaComponent {
       }
       const recElegido = this.listRecursos.find(obj => obj.id == this.form.get('recurso')?.value)
       const servElegido = this.listServicios.find(obj => obj.id == this.form.get('servicio')?.value)
+      const [hours, minutes] = this.form.get('hora')?.value.split(":").map(Number);
+      const dateTime = new Date(this.form.get('dia')?.value)
+      dateTime.setHours(hours)
+      dateTime.setMinutes(minutes)
       return <Reserva>{
         servicio:servElegido,
         recurso:recElegido,
         cliente: cliente,
         precio: servElegido?.precio,
         precioSenia: servElegido?.precioSenia,
-        fechahora: this.form.get('dia')?.value + this.form.get('hora')?.value,
+        fechahora: dateTime,
         cancelado: false
       }
     }

@@ -29,7 +29,7 @@ function generateReservas(count: number): Reserva[] {
 
 
       reservas.push({
-        id: (i + 1).toString(),
+        id: (i + 1),
         //fechahora: getRandomDate(),
         fechahora: getRandomDateTimeNotNull(start,end),
         precioSenia: getRandomNumber(50, 200),

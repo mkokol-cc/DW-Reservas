@@ -18,8 +18,8 @@ export class ReservaService {
   create(object: Reserva): Observable<Reserva> {
     return this.http.post<Reserva>(this.url, object)
   }
-  edit(object: Reserva){
-    return this.http.put<Reserva>(this.url, object)
+  edit(id:string, object: Reserva){
+    return this.http.put<Reserva>(this.url+"/"+id, object)
   }
 
 }

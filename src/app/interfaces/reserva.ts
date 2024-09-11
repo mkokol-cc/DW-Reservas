@@ -4,7 +4,7 @@ import { Recurso } from "./recurso"
 import { Servicio } from "./servicio"
 
 export interface Reserva {
-    id:string,
+    id:string|number,
     fechahora: string|Date,
     precioSenia: number,
     precio: number,

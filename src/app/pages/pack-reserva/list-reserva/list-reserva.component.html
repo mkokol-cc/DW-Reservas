@@ -3,9 +3,6 @@
       <mat-card-title>Reservas</mat-card-title>
   </mat-card-header>
   <mat-card-content>
-    <button mat-flat-button color="primary" (click)="create()">
-      Nuevo
-    </button>
     
     <mat-form-field>
         <mat-label>Buscar Por Cliente</mat-label>
@@ -146,7 +143,14 @@
     
           <ng-container matColumnDef="acciones">
             <th mat-header-cell *matHeaderCellDef></th>
-            <td mat-cell *matCellDef="let reserva"> {{reserva.id}} </td>
+            <td mat-cell *matCellDef="let reserva">
+              <button mat-icon-button color="primary" (click)="edit(reserva.id)"><!--(click)="edit(recurso)"-->
+                <mat-icon>edit</mat-icon>
+              </button>        
+              <button mat-icon-button color="primary" (click)="delete(reserva.id)"><!--(click)="delete(recurso)"-->
+                  <mat-icon>delete</mat-icon>
+              </button>
+            </td>
           </ng-container>
     
           <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
@@ -159,11 +163,23 @@
     
         </table>
       
-        <mat-paginator [pageSizeOptions]="[5, 10, 25]" aria-label="Select page of users"></mat-paginator>
+        
     </div>
       
       
   </mat-card-content>
+  <mat-card-actions>
+    <div style="width: 100% ;display: flex;align-items: center;justify-content: space-between;">
+      <div>
+        <mat-paginator [pageSizeOptions]="[5, 10, 25]" aria-label="Select page of users"></mat-paginator>
+      </div>
+      <div>
+        <button mat-flat-button color="primary" (click)="create()">
+          Nuevo
+        </button>
+      </div>
+    </div>
+  </mat-card-actions>
 </mat-card>
 
 

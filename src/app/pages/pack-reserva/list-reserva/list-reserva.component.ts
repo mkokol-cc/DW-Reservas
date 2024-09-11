@@ -23,9 +23,11 @@ import { CreateReservaComponent } from '../create-reserva/create-reserva.compone
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import localeEs from '@angular/common/locales/es';
 import { MatChipsModule } from '@angular/material/chips';
+import { DialogConfirmComponent } from '../../../components/dialog-confirm/dialog-confirm.component';
+import { EditReservaComponent } from '../edit-reserva/edit-reserva.component';
 
 export interface RegistroTabla {
-  id: string;
+  id: number;
   clienteNombre: string;
   fechaFormateada: string; // Fecha formateada
   servicioNombre: string;
@@ -137,7 +139,7 @@ export class ListReservaComponent {
       
         return filtraPorRecurso && filtraPorServicio && filtraPorFecha;
       }).map(reserva => ({
-        id: reserva.id,
+        id: +reserva.id,
         clienteNombre: reserva.cliente.apellido + ", " + reserva.cliente.nombre,
         fechaFormateada: new Date(reserva.fechahora).toLocaleString('es-ES', {
           day: '2-digit',
@@ -181,6 +183,39 @@ export class ListReservaComponent {
     dialogRef.afterClosed().subscribe(result => {
       if(result){
         this.service.create(<Reserva>result).subscribe(result => {
+          this.get()
+        })
+      }
+    });
+  }
+  delete(id:string) {
+    const reservaSeleccionada = this.list.find(r => r.id == id)
+    const dialogRef = this.dialog.open(DialogConfirmComponent, {
+      data: {
+        message: 'Vas a cancelar la reserva.',
+      },
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      if(result){
+        reservaSeleccionada?.cancelado == true
+        this.service.edit(id,reservaSeleccionada!).subscribe(result => {
+          this.get()
+        })
+      }
+    });
+  }
+  edit(id:string) {
+    const reservaSeleccionada = this.list.find(r => r.id == id)
+    console.log(reservaSeleccionada)
+    const dialogRef = this.dialog.open(EditReservaComponent, {
+      data: reservaSeleccionada
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(`Dialog EDIT RESERVA result: ${result}`);
+      console.log(result)
+      if(result){
+        result.id = id
+        this.service.edit(id,<Reserva>result).subscribe(result => {
           this.get()
         })
       }

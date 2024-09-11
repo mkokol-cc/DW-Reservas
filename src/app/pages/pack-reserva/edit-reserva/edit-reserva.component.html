@@ -1,1 +1,72 @@
-<p>edit-reserva works!</p>
+<h2 mat-dialog-title>Editar Reserva</h2>
+<mat-dialog-content>
+    <form class="example-form" [formGroup]="form" (ngSubmit)="onSubmit()">
+        
+        <mat-form-field>
+            <mat-label>Servicio</mat-label>
+            <mat-select formControlName="servicio">
+                <mat-option [value]="0">Todos</mat-option>
+                @for (servicio of listServicios; track servicio) {
+                    <mat-option [value]="servicio.id">{{servicio.nombre}}</mat-option>
+                }
+            </mat-select>
+        </mat-form-field>
+          
+        <mat-form-field>
+            <mat-label>Recurso</mat-label>
+            <mat-select formControlName="recurso">
+                <mat-option [value]="0">Todos</mat-option>
+                @for (recursos of listRecursos; track recursos) {
+                    <mat-option [value]="recursos.id">{{recursos.nombre}}</mat-option>
+                }
+            </mat-select>
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label>Fecha</mat-label>
+            <input matInput [matDatepicker]="picker" formControlName="dia" (dateChange)="getHorarioDisponibles()">
+            <mat-hint>MM/DD/YYYY</mat-hint>
+            <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label>Hora</mat-label>
+            <mat-select formControlName="hora">
+                @if (listDisponibles.length == 0){
+                    <mat-option [value]="0">Sin Turnos Disponibles</mat-option>
+                }
+                @for (hora of listDisponibles; track hora) {
+                    <mat-option [value]="hora">{{hora}}</mat-option>
+                }
+            </mat-select>
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label>Telefono</mat-label>
+            <input matInput placeholder="Nombre del servicio" formControlName="telefonoCliente">
+            @if (form.get('telefonoCliente')!.invalid) {
+                <mat-error>Ingrese un Nombre</mat-error>
+            }
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label>Nombre</mat-label>
+            <input matInput placeholder="Nombre del servicio" formControlName="nombreCliente">
+            @if (form.get('nombreCliente')!.invalid) {
+                <mat-error>Ingrese un Nombre</mat-error>
+            }
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label>Apellido</mat-label>
+            <input matInput placeholder="Nombre del servicio" formControlName="apellidoCliente">
+            @if (form.get('apellidoCliente')!.invalid) {
+                <mat-error>Ingrese un Nombre</mat-error>
+            }
+        </mat-form-field>
+
+        <button mat-flat-button color="primary" type="submit" [disabled]="form.invalid" [mat-dialog-close]="onSubmit()">Guardar</button>
+
+    </form>
+</mat-dialog-content>
