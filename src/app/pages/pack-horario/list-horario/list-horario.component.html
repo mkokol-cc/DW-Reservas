@@ -32,12 +32,17 @@
                 <span matListItemLine>
                     @for (horario of list; track horario) {
                         @if (horario.dia==1){
-                            <mat-chip-row (click)="edit(horario)">
-                                {{horario.inicio}}-{{horario.cierre}}
-                                <button matChipRemove (click)="delete(horario.id)">
-                                  <mat-icon>cancel</mat-icon>
-                                </button>
-                            </mat-chip-row>
+                            @if (horario.inicio && horario.cierre){
+                                <mat-chip-row (click)="edit(horario)">
+                                    {{horario.inicio}}-{{horario.cierre}}
+                                    <button matChipRemove (click)="delete(horario.id)">
+                                      <mat-icon>cancel</mat-icon>
+                                    </button>
+                                </mat-chip-row>
+                            }
+                            @else {
+                                <p>Cerrado</p>
+                            }
                         }
                     }
                 </span>
@@ -54,12 +59,17 @@
                 <span matListItemLine>
                     @for (horario of list; track horario) {
                         @if (horario.dia==2){
-                            <mat-chip-row (click)="edit(horario)">
-                                {{horario.inicio}}-{{horario.cierre}}
-                                <button matChipRemove (click)="delete(horario.id)">
-                                  <mat-icon>cancel</mat-icon>
-                                </button>
-                            </mat-chip-row>
+                            @if (horario.inicio && horario.cierre){
+                                <mat-chip-row (click)="edit(horario)">
+                                    {{horario.inicio}}-{{horario.cierre}}
+                                    <button matChipRemove (click)="delete(horario.id)">
+                                      <mat-icon>cancel</mat-icon>
+                                    </button>
+                                </mat-chip-row>
+                            }
+                            @else {
+                                <p>Cerrado</p>
+                            }
                         }
                     }
                 </span>
@@ -76,12 +86,17 @@
                 <span matListItemLine>
                     @for (horario of list; track horario) {
                         @if (horario.dia==3){
-                            <mat-chip-row (click)="edit(horario)">
-                                {{horario.inicio}}-{{horario.cierre}}
-                                <button matChipRemove (click)="delete(horario.id)">
-                                  <mat-icon>cancel</mat-icon>
-                                </button>
-                            </mat-chip-row>
+                            @if (horario.inicio && horario.cierre){
+                                <mat-chip-row (click)="edit(horario)">
+                                    {{horario.inicio}}-{{horario.cierre}}
+                                    <button matChipRemove (click)="delete(horario.id)">
+                                      <mat-icon>cancel</mat-icon>
+                                    </button>
+                                </mat-chip-row>
+                            }
+                            @else {
+                                <p>Cerrado</p>
+                            }
                         }
                     }
                 </span>
@@ -98,12 +113,17 @@
                 <span matListItemLine>
                     @for (horario of list; track horario) {
                         @if (horario.dia==4){
-                            <mat-chip-row (click)="edit(horario)">
-                                {{horario.inicio}}-{{horario.cierre}}
-                                <button matChipRemove (click)="delete(horario.id)">
-                                  <mat-icon>cancel</mat-icon>
-                                </button>
-                            </mat-chip-row>
+                            @if (horario.inicio && horario.cierre){
+                                <mat-chip-row (click)="edit(horario)">
+                                    {{horario.inicio}}-{{horario.cierre}}
+                                    <button matChipRemove (click)="delete(horario.id)">
+                                      <mat-icon>cancel</mat-icon>
+                                    </button>
+                                </mat-chip-row>
+                            }
+                            @else {
+                                <p>Cerrado</p>
+                            }
                         }
                     }
                 </span>
@@ -120,12 +140,17 @@
                 <span matListItemLine>
                     @for (horario of list; track horario) {
                         @if (horario.dia==5){
-                            <mat-chip-row (click)="edit(horario)">
-                                {{horario.inicio}}-{{horario.cierre}}
-                                <button matChipRemove (click)="delete(horario.id)">
-                                  <mat-icon>cancel</mat-icon>
-                                </button>
-                            </mat-chip-row>
+                            @if (horario.inicio && horario.cierre){
+                                <mat-chip-row (click)="edit(horario)">
+                                    {{horario.inicio}}-{{horario.cierre}}
+                                    <button matChipRemove (click)="delete(horario.id)">
+                                      <mat-icon>cancel</mat-icon>
+                                    </button>
+                                </mat-chip-row>
+                            }
+                            @else {
+                                <p>Cerrado</p>
+                            }
                         }
                     }
                 </span>
@@ -142,12 +167,17 @@
                 <span matListItemLine>
                     @for (horario of list; track horario) {
                         @if (horario.dia==6){
-                            <mat-chip-row (click)="edit(horario)">
-                                {{horario.inicio}}-{{horario.cierre}}
-                                <button matChipRemove (click)="delete(horario.id)">
-                                  <mat-icon>cancel</mat-icon>
-                                </button>
-                            </mat-chip-row>
+                            @if (horario.inicio && horario.cierre){
+                                <mat-chip-row (click)="edit(horario)">
+                                    {{horario.inicio}}-{{horario.cierre}}
+                                    <button matChipRemove (click)="delete(horario.id)">
+                                      <mat-icon>cancel</mat-icon>
+                                    </button>
+                                </mat-chip-row>
+                            }
+                            @else {
+                                <p>Cerrado</p>
+                            }
                         }
                     }
                 </span>
@@ -164,12 +194,17 @@
                 <span matListItemLine>
                     @for (horario of list; track horario) {
                         @if (horario.dia==0){
-                            <mat-chip-row (click)="edit(horario)">
-                                {{horario.inicio}}-{{horario.cierre}}
-                                <button matChipRemove (click)="delete(horario.id)">
-                                  <mat-icon>cancel</mat-icon>
-                                </button>
-                            </mat-chip-row>
+                            @if (horario.inicio && horario.cierre){
+                                <mat-chip-row (click)="edit(horario)">
+                                    {{horario.inicio}}-{{horario.cierre}}
+                                    <button matChipRemove (click)="delete(horario.id)">
+                                      <mat-icon>cancel</mat-icon>
+                                    </button>
+                                </mat-chip-row>
+                            }
+                            @else {
+                                <p>Cerrado</p>
+                            }
                         }
                     }
                 </span>

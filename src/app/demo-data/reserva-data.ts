@@ -104,34 +104,39 @@ function generateReservas(count: number): Reserva[] {
     horario: Horario
   ): Date|null {
     // Filtrar los días que coincidan con el `horario.dia` entre `fechaInicio` y `fechaFin`
-    const validDays: Date[] = [];
-    let currentDate = new Date(fechaInicio);
-  
-    while (currentDate <= fechaFin) {
-      if (currentDate.getDay() === horario.dia) {
-        validDays.push(new Date(currentDate));
+    if(horario.inicio && horario.cierre){
+      const validDays: Date[] = [];
+      let currentDate = new Date(fechaInicio);
+    
+      while (currentDate <= fechaFin) {
+        if (currentDate.getDay() === horario.dia) {
+          validDays.push(new Date(currentDate));
+        }
+        currentDate.setDate(currentDate.getDate() + 1);
       }
-      currentDate.setDate(currentDate.getDate() + 1);
-    }
-  
-    if (validDays.length === 0) {
+    
+      if (validDays.length === 0) {
+        return null
+      }
+    
+      // Seleccionar un día aleatorio dentro de los días válidos
+      const randomDay = getRandomItem(validDays);
+    
+      // Convertir el horario de inicio y cierre a minutos
+      const startMinutes = convertTimeToMinutes(horario.inicio);
+      const endMinutes = convertTimeToMinutes(horario.cierre) - 30; // Excluir el cierre exacto
+    
+      // Generar una hora aleatoria entre el inicio y el cierre, en intervalos de 30 minutos
+      const randomMinute = getRandomNumberInRangeWithInterval(startMinutes, endMinutes, 30);
+    
+      // Asignar la hora generada al día seleccionado
+      randomDay.setHours(Math.floor(randomMinute / 60), randomMinute % 60, 0, 0);
+    
+      return randomDay//.toLocaleString()//toISOString();
+    }else{
       return null
     }
-  
-    // Seleccionar un día aleatorio dentro de los días válidos
-    const randomDay = getRandomItem(validDays);
-  
-    // Convertir el horario de inicio y cierre a minutos
-    const startMinutes = convertTimeToMinutes(horario.inicio);
-    const endMinutes = convertTimeToMinutes(horario.cierre) - 30; // Excluir el cierre exacto
-  
-    // Generar una hora aleatoria entre el inicio y el cierre, en intervalos de 30 minutos
-    const randomMinute = getRandomNumberInRangeWithInterval(startMinutes, endMinutes, 30);
-  
-    // Asignar la hora generada al día seleccionado
-    randomDay.setHours(Math.floor(randomMinute / 60), randomMinute % 60, 0, 0);
-  
-    return randomDay//.toLocaleString()//toISOString();
+
   }
   
   // Convertir una hora en formato "HH:MM" a minutos

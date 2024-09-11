@@ -46,7 +46,7 @@ export class ListHorarioComponent {
 
   get(){
     this.service.list().subscribe(result => {
-      this.list = result.sort((a, b) => a.inicio.localeCompare(b.inicio));
+      this.list = result.sort((a, b) => a.inicio && b.inicio ? a.inicio.localeCompare(b.inicio) : a.dia);
     })
   }
 

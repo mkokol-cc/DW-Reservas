@@ -88,9 +88,11 @@ export class CreateReservaComponent {
     const horariosDelDia = this.listHorarios.filter(h => h.dia == dateSeleccionado.getDay())
     this.listDisponibles = []
     horariosDelDia.forEach(h => {
-      this.generarHorasEnIntervalos(h.inicio,h.cierre).forEach(hora=>{
-        this.listDisponibles.push(hora)
-      })
+      if(h.inicio && h.cierre){
+        this.generarHorasEnIntervalos(h.inicio!,h.cierre!).forEach(hora=>{
+          this.listDisponibles.push(hora)
+        })
+      }
     })
   }
   generarHorasEnIntervalos(horaInicio: string, horaFin: string): string[] {
