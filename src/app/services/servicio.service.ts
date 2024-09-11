@@ -18,8 +18,8 @@ export class ServicioService {
   create(object: Servicio): Observable<Servicio> {
     return this.http.post<Servicio>(this.url, object)
   }
-  edit(object: Servicio){
-    return this.http.put<Servicio>(this.url, object)
+  edit(id:number, object: Servicio){
+    return this.http.put<Servicio>(`${this.url}/${id}`, object)
   }
   delete(id:number){
     return this.http.delete(`${this.url}/${id}`)

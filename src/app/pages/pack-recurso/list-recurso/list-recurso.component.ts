@@ -72,8 +72,9 @@ export class ListRecursoComponent {
     });
     dialogRef.afterClosed().subscribe(result => {
       //console.log(`Dialog result: ${result}`);
+      result.id = obj.id
       if(result){
-        this.service.edit(<Recurso>result).subscribe(result => {
+        this.service.edit(obj.id,<Recurso>result).subscribe(result => {
           this.get()
         })
       }

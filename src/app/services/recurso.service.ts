@@ -18,8 +18,8 @@ export class RecursoService {
   create(object: Recurso): Observable<Recurso> {
     return this.http.post<Recurso>(this.url, object)
   }
-  edit(object: Recurso){
-    return this.http.put<Recurso>(this.url, object)
+  edit(id:number, object: Recurso){
+    return this.http.put<Recurso>(`${this.url}/${id}`, object)
   }
   delete(id:number){
     return this.http.delete(`${this.url}/${id}`)
