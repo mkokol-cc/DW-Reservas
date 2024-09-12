@@ -4,12 +4,18 @@ import { MatCardModule } from '@angular/material/card';
 import { provideNativeDateAdapter } from '@angular/material/core';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { HorarioService } from '../../../services/horario.service';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-list-horario-inactivo',
   standalone: true,
   providers: [provideNativeDateAdapter()],
-  imports: [MatCardModule,MatDatepickerModule,MatButtonModule],
+  imports: [
+    MatCardModule,
+    MatDatepickerModule,
+    MatButtonModule,
+    CommonModule
+  ],
   templateUrl: './list-horario-inactivo.component.html',
   styleUrl: './list-horario-inactivo.component.scss'
 })

@@ -45,7 +45,7 @@ export class ListBlacklistClienteComponent {
 
   get(){
     this.service.list().subscribe(result => {
-      this.list = result//.sort((a, b) => a.inicio.localeCompare(b.inicio));
+      this.list = result.filter(c=>!c.habilitado)//.sort((a, b) => a.inicio.localeCompare(b.inicio));
     })
   }
 }

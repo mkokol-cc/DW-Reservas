@@ -4,7 +4,7 @@
     </mat-card-header>
     <mat-card-content>
         <mat-calendar [(selected)]="selected" [minDate]="minDate"></mat-calendar>
-        <p>{{selected}}</p>
+        <p>{{selected  | date:'dd/MM/yyyy' }}</p>
         <button mat-flat-button color="primary" type="submit" [disabled]="!selected" (click)="newInactivo()">Hacer No Laboral</button>
     </mat-card-content>
 </mat-card>
