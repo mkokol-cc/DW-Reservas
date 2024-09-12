@@ -4,11 +4,14 @@ import {MatTabsModule} from '@angular/material/tabs';
 import { ListWeekHorarioComponent } from '../pack-horario/list-week-horario/list-week-horario.component';
 import { CreateWeekHorarioComponent } from '../pack-horario/create-week-horario/create-week-horario.component';
 import { FormControl } from '@angular/forms';
+import { ListHorarioInactivoComponent } from '../pack-horario/list-horario-inactivo/list-horario-inactivo.component';
 
 @Component({
   selector: 'app-section-horarios',
   standalone: true,
-  imports: [MatTabsModule,MatCardModule,ListWeekHorarioComponent,CreateWeekHorarioComponent],
+  imports: [MatTabsModule,MatCardModule,ListWeekHorarioComponent,CreateWeekHorarioComponent,
+    ListHorarioInactivoComponent
+  ],
   templateUrl: './section-horarios.component.html',
   styleUrl: './section-horarios.component.scss'
 })

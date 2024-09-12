@@ -79,9 +79,11 @@ export class CreateWeekHorarioComponent implements OnChanges {
         inicio:element.inicio,
         cierre:element.cierre,
         dia:element.dia,
-        programadoDesde:this.fechaDesde,
-        programadoHasta:this.fechaHasta
+        programadoDesde:this.fechaDesde.value,
+        programadoHasta:this.fechaHasta.value
       }
+      //console.log(h)
+      //JSON.stringify(h)
       this.service.create(<Horario>h).subscribe()
     });
     //guardar toda la lista

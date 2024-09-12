@@ -54,7 +54,7 @@ export class ListWeekHorarioComponent {
         acc[key].push(objeto);
         return acc;
       }, {} as { [key: string]: Horario[] });
-      this.selected = new Date(Object.keys(this.agrupadosPorProgramado)[0])
+      this.selected = this.list[0].programadoDesde
       console.log(this.selected)
       console.log(this.agrupadosPorProgramado)
     })

@@ -1,5 +1,5 @@
 export interface Horario {
-    id:number,
+    id:number|undefined,
     inicio:string|null,
     cierre:string|null,
     dia:number,//0-domingo 6-sabado
