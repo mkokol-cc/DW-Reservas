@@ -2,3 +2,13 @@
     flex: 1 1 auto;
     text-align: center;
 }
+
+.outlet-container{
+    padding: 20px;
+}
+
+@media (max-width: 400px) {
+    .outlet-container{
+        padding: 10px 0;
+    }
+}

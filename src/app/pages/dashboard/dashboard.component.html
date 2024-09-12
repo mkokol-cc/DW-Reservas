@@ -2,21 +2,21 @@
     <mat-drawer #drawer mode="side" opened>
         <div style="padding: 20px 40px;">
             <app-sidenav-menu></app-sidenav-menu>
-            <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon" (click)="drawer.toggle()">
+            <button mat-icon-button class="example-icon" (click)="drawer.toggle()">
                 <mat-icon>menu</mat-icon>
             </button>
         </div>
     </mat-drawer>
     <mat-drawer-content>
         <mat-toolbar>
-            <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon" (click)="drawer.toggle()">
+            <button mat-icon-button class="example-icon" (click)="drawer.toggle()">
                 <mat-icon>menu</mat-icon>
             </button>
             <span class="example-spacer">Peluqueria Bros</span>
             <app-buzon-menu></app-buzon-menu>
             <app-perfil-menu></app-perfil-menu>
         </mat-toolbar>
-        <div style="padding: 20px;">
+        <div class="outlet-container">
             <router-outlet></router-outlet>
         </div>
     </mat-drawer-content>
