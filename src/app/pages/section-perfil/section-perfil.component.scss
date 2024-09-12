@@ -1,0 +1,37 @@
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 3 columns of equal width (1 fraction unit each) */
+    grid-gap: 10px; /* Adds spacing between grid items */
+    padding: 10px;
+}
+.grid-container div.item1{
+    grid-column: span 2;
+    padding: 20px;
+    text-align: center;
+}
+.grid-container div.item2{
+    grid-column: span 1;
+    padding: 20px;
+    text-align: center;
+}
+
+div.item2 mat-list{
+    text-align: start;
+}
+
+div.item1 form mat-form-field{
+    width: 100%;
+}
+
+mat-list-item div{
+    height: 100%;
+    display: flex;
+    align-content: center;
+    align-items: center;
+}
+mat-icon{
+    color: #32d432;
+    font-size: 50px;
+    width: 50px;
+    height: 50px;
+}
