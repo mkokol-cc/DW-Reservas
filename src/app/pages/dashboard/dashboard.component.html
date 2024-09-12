@@ -1,5 +1,5 @@
-<mat-drawer-container class="example-container" style="height: 100vh;">
-    <mat-drawer #drawer mode="side" opened>
+<mat-drawer-container class="example-container" style="height: 100vh;" [hasBackdrop]="isSmallScreen">
+    <mat-drawer #drawer [mode]="mode" opened>
         <div style="padding: 20px 40px;">
             <app-sidenav-menu></app-sidenav-menu>
             <button mat-icon-button class="example-icon" (click)="drawer.toggle()">
