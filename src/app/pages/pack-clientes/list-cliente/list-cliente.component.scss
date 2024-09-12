@@ -1,0 +1,12 @@
+#table-mobile-container{
+    display:none
+}
+
+@media (max-width: 600px) {
+    #table-mobile-container{
+        display:block
+    }
+    #table-container{
+        display: none;
+    }
+}

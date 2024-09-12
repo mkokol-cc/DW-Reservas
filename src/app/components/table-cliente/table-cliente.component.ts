@@ -1,33 +1,29 @@
-import { Component, ViewChild } from '@angular/core';
-import { Cliente } from '../../../interfaces/cliente';
-import { ClienteService } from '../../../services/cliente.service';
-import { CommonModule } from '@angular/common';
-import { MatTableDataSource, MatTableModule } from '@angular/material/table';
+import { Component, Input, OnChanges, SimpleChanges, ViewChild } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { MatSort, MatSortModule } from '@angular/material/sort';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material/input';
-import { MatCardModule } from '@angular/material/card';
-import { MatIconModule } from '@angular/material/icon';
+import { MatTableDataSource, MatTableModule } from '@angular/material/table';
+import { Cliente } from '../../interfaces/cliente';
+import { ClienteService } from '../../services/cliente.service';
+import { DialogConfirmComponent } from '../dialog-confirm/dialog-confirm.component';
+import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
-import { DialogConfirmComponent } from '../../../components/dialog-confirm/dialog-confirm.component';
-import { MatDialog } from '@angular/material/dialog';
-import { TableClienteComponent } from '../../../components/table-cliente/table-cliente.component';
-import { TableClienteMobileComponent } from '../../../components/table-cliente-mobile/table-cliente-mobile.component';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
-  selector: 'app-list-cliente',
+  selector: 'app-table-cliente',
   standalone: true,
-  imports: [MatFormFieldModule, MatInputModule, MatTableModule, MatSortModule, MatPaginatorModule,CommonModule,
-    MatCardModule, MatIconModule, MatButtonModule,
-    TableClienteComponent,
-    TableClienteMobileComponent
+  imports: [
+    MatTableModule, MatSortModule, MatPaginatorModule,CommonModule,
+    MatIconModule, MatButtonModule,
   ],
-  templateUrl: './list-cliente.component.html',
-  styleUrl: './list-cliente.component.scss'
+  templateUrl: './table-cliente.component.html',
+  styleUrl: './table-cliente.component.scss'
 })
-export class ListClienteComponent {
-  
+export class TableClienteComponent implements OnChanges {
+
+  @Input() busqueda!:Event
+
   list:Cliente[]=[]
 
   displayedColumns: string[] = ['nombre', 'telefono', 'reservas', 'estado', 'acciones'];
@@ -46,6 +42,12 @@ export class ListClienteComponent {
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
     })
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if(changes['busqueda']){
+      this.applyFilter(this.busqueda)
+    }
   }
 
   toBlackList(cliente:Cliente){
@@ -72,10 +74,4 @@ export class ListClienteComponent {
       this.dataSource.paginator.firstPage();
     }
   }
-
-  eventFilter!:Event
-  sendFilter(event:Event){
-    this.eventFilter = event
-  }
-
 }
