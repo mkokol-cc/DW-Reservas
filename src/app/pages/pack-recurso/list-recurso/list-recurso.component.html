@@ -12,12 +12,30 @@
                 <mat-list-item>
                     <span matListItemTitle>{{recurso.nombre}}</span>
                     <div matListItemMeta>
-                        <button mat-icon-button color="primary" aria-label="Example icon button with a menu icon" (click)="edit(recurso)">
-                            <mat-icon>edit</mat-icon>
-                        </button>        
-                        <button mat-icon-button color="primary" aria-label="Example icon button with a menu icon" (click)="delete(recurso)">
-                            <mat-icon>delete</mat-icon>
-                        </button>
+                        
+                        <div class="mobile-menu">
+                            <button mat-icon-button [matMenuTriggerFor]="menu">
+                                <mat-icon>more_vert</mat-icon>
+                            </button>
+                            <mat-menu #menu="matMenu">
+                                <button mat-menu-item color="primary" (click)="edit(recurso)">
+                                    <mat-icon>edit</mat-icon>
+                                    <span>Editar</span>
+                                </button>        
+                                <button mat-menu-item color="primary" (click)="delete(recurso)">
+                                    <mat-icon>delete</mat-icon>
+                                    <span>Borrar</span>
+                                </button>
+                            </mat-menu>
+                        </div>
+                        <div class="menu">
+                            <button mat-icon-button color="primary" (click)="edit(recurso)">
+                                <mat-icon>edit</mat-icon>
+                            </button>        
+                            <button mat-icon-button color="primary" (click)="delete(recurso)">
+                                <mat-icon>delete</mat-icon>
+                            </button>
+                        </div>
                     </div>
                 </mat-list-item>
             }

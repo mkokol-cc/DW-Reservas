@@ -3,6 +3,136 @@
       <mat-card-title>Reservas</mat-card-title>
   </mat-card-header>
   <mat-card-content>
+
+
+    <div style="display: flex;justify-content: center;">
+      <div class="filters-section">
+        <div class="filter-row row-1">
+          <div class="filter-item">
+            <mat-form-field>
+              <mat-label>Buscar Por Cliente</mat-label>
+              <input matInput (keyup)="sendFilter($event)" placeholder="Busqueda" #input>
+            </mat-form-field>
+          </div>
+          <div class="filter-item">
+            <mat-form-field>
+              <mat-label>Servicio</mat-label>
+              <mat-select [(ngModel)]="filter.servicio">
+                  <mat-option [value]="null">Todos</mat-option>
+                  @for (servicio of listServicios; track servicio) {
+                      <mat-option [value]="servicio">{{servicio.nombre}}</mat-option>
+                  }
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div class="filter-item">
+            <mat-form-field>
+              <mat-label>Recurso</mat-label>
+              <mat-select [(ngModel)]="filter.recurso">
+                  <mat-option [value]="null">Todos</mat-option>
+                  @for (recurso of listRecursos; track recurso) {
+                      <mat-option [value]="recurso">{{recurso.nombre}}</mat-option>
+                  }
+              </mat-select>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="filter-row row-2">
+          <div class="filter-item">
+            <div class="day-selector">
+              <button mat-icon-button (click)="filterByDay(prevDay(daySelected))">
+                <mat-icon>chevron_left</mat-icon>
+              </button>
+              <mat-card>
+                <mat-card-header class="prev-day-card" (click)="filterByDay(prevDay(daySelected))">
+                  <mat-card-title>{{ DAY_NAMES[prevDay(daySelected).getDay()] }}</mat-card-title>
+                  <mat-card-subtitle>{{ prevDay(daySelected) | date:'d \'de\' MMM':'es-ES'}}</mat-card-subtitle>
+                </mat-card-header>
+              </mat-card>
+              <mat-card class="selected-day">
+                <mat-card-header>
+                  <mat-card-title>{{ DAY_NAMES[daySelected.getDay()] }}</mat-card-title>
+                  <mat-card-subtitle>{{ daySelected | date:'d \'de\' MMM':'es-ES'}}</mat-card-subtitle>
+                </mat-card-header>
+              </mat-card>
+              <mat-card>
+                <mat-card-header class="next-day-card" (click)="filterByDay(nextDay(daySelected))">
+                  <mat-card-title>{{ DAY_NAMES[nextDay(daySelected).getDay()] }}</mat-card-title>
+                  <mat-card-subtitle>{{ nextDay(daySelected) | date:'d \'de\' MMM':'es-ES'}}</mat-card-subtitle>
+                </mat-card-header>
+              </mat-card>
+              <button mat-icon-button (click)="filterByDay(nextDay(daySelected))">
+                <mat-icon>chevron_right</mat-icon>
+              </button>
+            </div>
+          </div>
+          <div class="filter-item">
+            <mat-form-field>
+              <mat-label>Rango de Dias</mat-label>
+              <mat-date-range-input [formGroup]="dayRange" [rangePicker]="picker">
+                <input matStartDate formControlName="start" placeholder="Desde">
+                <input matEndDate formControlName="end" placeholder="Hasta">
+              </mat-date-range-input>
+              <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+              <mat-date-range-picker #picker></mat-date-range-picker>
+            
+              @if (dayRange.controls.start.hasError('matStartDateInvalid')) {
+                <mat-error>Invalid start date</mat-error>
+              }
+              @if (dayRange.controls.end.hasError('matEndDateInvalid')) {
+                <mat-error>Invalid end date</mat-error>
+              }
+            </mat-form-field>
+          </div>
+        </div>
+  
+        <div class="filter-row row-3">
+          @if(filter.dateStart || filter.dateEnd || filter.recurso || filter.servicio){
+            <div class="filters">
+              <h3>Filtros:</h3>
+              <p>
+                @if(filter.dateStart && filter.dateEnd){
+                  <mat-chip-row>
+                    @if(compareDatesIgnoreTime(filter.dateStart,filter.dateEnd)==0){
+                      Fecha: {{filter.dateStart | date:'d \'de\' MMM':'es-ES'}}
+                    }
+                    @else{
+                      Fecha: {{filter.dateStart | date:'d \'de\' MMM':'es-ES'}}-{{filter.dateEnd | date:'d \'de\' MMM':'es-ES'}}
+                    }
+                    <button matChipRemove (click)="removeDayFilter()">
+                      <mat-icon>cancel</mat-icon>
+                    </button>
+                  </mat-chip-row> 
+                }
+                @if(filter.recurso){
+                  <mat-chip-row>
+                    {{filter.recurso.nombre}}
+                    <button matChipRemove (click)="removeRecursoFilter()">
+                      <mat-icon>cancel</mat-icon>
+                    </button>
+                  </mat-chip-row> 
+                }
+                @if(filter.servicio){
+                  <mat-chip-row>
+                    {{filter.servicio.nombre}}
+                    <button matChipRemove (click)="removeServicioFilter()">
+                      <mat-icon>cancel</mat-icon>
+                    </button>
+                  </mat-chip-row> 
+                }
+              </p>
+            </div>
+          }
+        </div>
+      </div>
+    </div>
+
+
+
+
+@if(false){
+
+
     
     <mat-form-field>
         <mat-label>Buscar Por Cliente</mat-label>
@@ -113,30 +243,29 @@
           </p>
         </div>
       }
-
-      <div id="table-mobile-container">
-        <app-table-reserva-mobile [dateStart]="filter.dateStart"
-        [dateEnd]="filter.dateEnd"
-        [recurso]="filter.recurso"
-        [servicio]="filter.servicio"
-        [estado]="filter.estado"
-        [busqueda]="searchEvent"
-        ></app-table-reserva-mobile>
-      </div>
-      <div id="table-container">
-        <app-table-reserva [dateStart]="filter.dateStart"
-        [dateEnd]="filter.dateEnd"
-        [recurso]="filter.recurso"
-        [servicio]="filter.servicio"
-        [estado]="filter.estado"
-        [busqueda]="searchEvent"
-        ></app-table-reserva>
-      </div>
-      
-        
     </div>
+
+}        
       
-      
+    <div id="table-mobile-container">
+      <app-table-reserva-mobile [dateStart]="filter.dateStart"
+      [dateEnd]="filter.dateEnd"
+      [recurso]="filter.recurso"
+      [servicio]="filter.servicio"
+      [estado]="filter.estado"
+      [busqueda]="searchEvent"
+      ></app-table-reserva-mobile>
+    </div>
+    <div id="table-container">
+      <app-table-reserva [dateStart]="filter.dateStart"
+      [dateEnd]="filter.dateEnd"
+      [recurso]="filter.recurso"
+      [servicio]="filter.servicio"
+      [estado]="filter.estado"
+      [busqueda]="searchEvent"
+      ></app-table-reserva>
+    </div>
+    
   </mat-card-content>
   <mat-card-actions>
     <div style="width: 100% ;display: flex;align-items: center;justify-content: space-between;">

@@ -12,12 +12,20 @@ import {MatGridListModule} from '@angular/material/grid-list';
 import { ToastrService } from 'ngx-toastr';
 import { ServicioService } from '../../../services/servicio.service';
 import { MatCardModule } from '@angular/material/card';
+import { MatMenuModule } from '@angular/material/menu';
 
 @Component({
   selector: 'app-list-servicio',
   standalone: true,
-  imports: [MatButtonModule,MatIconModule,MatExpansionModule,MatListModule,MatDialogModule,MatGridListModule,
-    MatCardModule
+  imports: [
+    MatButtonModule,
+    MatIconModule,
+    MatExpansionModule,
+    MatListModule,
+    MatDialogModule,
+    MatGridListModule,
+    MatCardModule,
+    MatMenuModule
   ],
   templateUrl: './list-servicio.component.html',
   styleUrl: './list-servicio.component.scss'

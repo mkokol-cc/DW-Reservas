@@ -12,12 +12,20 @@ import { ToastrService } from 'ngx-toastr';
 import { Recurso } from '../../../interfaces/recurso';
 import { RecursoService } from '../../../services/recurso.service';
 import { MatCardModule } from '@angular/material/card';
+import { MatMenuModule } from '@angular/material/menu';
 
 @Component({
   selector: 'app-list-recurso',
   standalone: true,
-  imports: [MatButtonModule,MatIconModule,MatExpansionModule,MatListModule,MatDialogModule,MatGridListModule,
-    MatCardModule
+  imports: [
+    MatButtonModule,
+    MatIconModule,
+    MatExpansionModule,
+    MatListModule,
+    MatDialogModule,
+    MatGridListModule,
+    MatCardModule,
+    MatMenuModule
   ],
   templateUrl: './list-recurso.component.html',
   styleUrl: './list-recurso.component.scss'

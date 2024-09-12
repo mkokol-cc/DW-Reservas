@@ -1,15 +1,56 @@
+.filters-section{
+    max-width: 900px;
+}
+.filter-row{
+    display: grid;
+    grid-template-columns: repeat(6, 1fr); /* 3 columns of equal width (1 fraction unit each) */
+    grid-gap: 10px; /* Adds spacing between grid items */
+    padding: 10px;
+    align-items: center;
+}
+.filter-row.row-1 .filter-item{
+    grid-column: span 2;
+    text-align: center;
+}
+.filter-row.row-2 .filter-item{
+    grid-column: span 3;
+    text-align: center;
+}
+.filter-row.row-3 .filter-item{
+    grid-column: span 6;
+    text-align: center;
+}
+@media (max-width: 800px) {
+    .filter-row {
+        grid-template-columns: repeat(1, 1fr); /* 1 column layout */
+    }
+    .filter-item{
+        grid-column: span 1;
+    }
+    .prev-day-card, .next-day-card{
+        display: none;
+    }
+}
+
+
+
+
+
 .day-selector{
     display: flex;
     align-items: center;
+    justify-content: center;
 }
 .selected-day{
     background-color: #0b5bc4;
 }
 
+
+
+
 #table-mobile-container{
     display:none
 }
-
 @media (max-width: 678px) {
     #table-mobile-container{
         display:block
