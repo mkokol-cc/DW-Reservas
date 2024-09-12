@@ -5,3 +5,16 @@
 .selected-day{
     background-color: #0b5bc4;
 }
+
+#table-mobile-container{
+    display:none
+}
+
+@media (max-width: 678px) {
+    #table-mobile-container{
+        display:block
+    }
+    #table-container{
+        display: none;
+    }
+}

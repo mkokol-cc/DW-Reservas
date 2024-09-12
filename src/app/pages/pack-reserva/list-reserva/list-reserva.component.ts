@@ -25,6 +25,8 @@ import localeEs from '@angular/common/locales/es';
 import { MatChipsModule } from '@angular/material/chips';
 import { DialogConfirmComponent } from '../../../components/dialog-confirm/dialog-confirm.component';
 import { EditReservaComponent } from '../edit-reserva/edit-reserva.component';
+import { TableReservaComponent } from '../../../components/table-reserva/table-reserva.component';
+import { TableReservaMobileComponent } from '../../../components/table-reserva-mobile/table-reserva-mobile.component';
 
 export interface RegistroTabla {
   id: number;
@@ -44,9 +46,6 @@ registerLocaleData(localeEs);
   imports: [
     MatFormFieldModule,
     MatInputModule,
-    MatTableModule,
-    MatSortModule,
-    MatPaginatorModule,
     CommonModule,
     ConfiguracionRecordatoriosComponent,
     MatCardModule ,
@@ -57,7 +56,10 @@ registerLocaleData(localeEs);
     ReactiveFormsModule,
     MatSelectModule,
     MatDialogModule,MatChipsModule,
-    MatCardModule
+    MatCardModule,
+
+    TableReservaComponent,
+    TableReservaMobileComponent
   ],
   templateUrl: './list-reserva.component.html',
   styleUrl: './list-reserva.component.scss'
@@ -66,10 +68,7 @@ export class ListReservaComponent {
 
   DAY_NAMES = ['Dom', 'Lun', 'Mar', 'Mie', 'Jue', 'Vie', 'Sab'];
   daySelected:Date = new Date()
-
   list:Reserva[]=[]
-  displayedColumns: string[] = ['id', 'clienteNombre', 'fechaFormateada', 'estado', 'servicio', 'acciones'];
-  dataSource!: MatTableDataSource<RegistroTabla>;
   dayRange = new FormGroup({
     start: new FormControl<Date | null>(this.daySelected),
     end: new FormControl<Date | null>(this.daySelected),
@@ -79,9 +78,6 @@ export class ListReservaComponent {
   selectedRecurso:number=0
   selectedServicio:number=0
 
-  @ViewChild(MatPaginator) paginator!: MatPaginator;
-  @ViewChild(MatSort) sort!: MatSort;
-
   filter:any = {
     dateStart: null,
     dateEnd: null,
@@ -89,6 +85,9 @@ export class ListReservaComponent {
     servicio: null,
     estado: null,
   }
+
+  @ViewChild(TableReservaMobileComponent) tableMobile!: TableReservaMobileComponent;
+  @ViewChild(TableReservaComponent) table!: TableReservaComponent;
 
   constructor(private service:ReservaService, 
     private recursoService:RecursoService, 
@@ -100,10 +99,8 @@ export class ListReservaComponent {
           // Lógica para manejar el rango de fechas
           this.filter.dateStart = val.start,
           this.filter.dateEnd = val.end
-          this.get()
         }
       });
-    this.get()
     this.getRecursos()
     this.getServicios()
   }
@@ -119,47 +116,6 @@ export class ListReservaComponent {
     })
   }
 
-  get(){
-    this.service.list().subscribe(result => {
-      this.list = result
-      const registrosTabla: RegistroTabla[] = this.list.filter(reserva =>{
-        const fechaInicioNormalizada = this.filter.dateStart ? new Date(this.filter.dateStart) : null;
-        if (fechaInicioNormalizada) {
-          fechaInicioNormalizada.setHours(0, 0, 0, 0);
-        }
-        const fechaFinNormalizada = this.filter.dateEnd ? new Date(this.filter.dateEnd) : null;
-        if (fechaFinNormalizada) {
-          fechaFinNormalizada.setHours(23, 59, 59, 999);
-        }
-
-        const filtraPorRecurso = !this.filter.recurso || reserva.recurso.id == this.filter.recurso.id;
-        const filtraPorServicio = !this.filter.servicio || reserva.servicio.id == this.filter.servicio.id;
-        const filtraPorFecha = (!this.filter.dateStart || new Date(reserva.fechahora) >= fechaInicioNormalizada!) &&
-                               (!this.filter.dateEnd || new Date(reserva.fechahora) <= fechaFinNormalizada!);
-      
-        return filtraPorRecurso && filtraPorServicio && filtraPorFecha;
-      }).map(reserva => ({
-        id: +reserva.id,
-        clienteNombre: reserva.cliente.apellido + ", " + reserva.cliente.nombre,
-        fechaFormateada: new Date(reserva.fechahora).toLocaleString('es-ES', {
-          day: '2-digit',
-          month: '2-digit',
-          year: 'numeric',
-          hour: '2-digit',
-          minute: '2-digit',
-          hour12: false // Para formato 24 horas
-        }),        
-        servicioNombre: reserva.servicio.nombre,
-        recursoNombre: reserva.recurso.nombre,
-        estado: 'Reserva' // o cualquier otro valor
-      }));
-      this.list = result//.sort((a, b) => a.fechahora.localeCompare(b.fechahora));
-      this.dataSource = new MatTableDataSource(registrosTabla);
-      this.dataSource.paginator = this.paginator;
-      this.dataSource.sort = this.sort;
-    })
-  }
-
   compareDatesIgnoreTime(date1: Date, date2: Date): number {
     // Normaliza ambos objetos Date a medianoche
     const d1 = new Date(date1);
@@ -170,12 +126,9 @@ export class ListReservaComponent {
     return d1.getTime() - d2.getTime();
   }
 
-  applyFilter(event: Event) {
-    const filterValue = (event.target as HTMLInputElement).value;
-    this.dataSource.filter = filterValue.trim().toLowerCase();
-    if (this.dataSource.paginator) {
-      this.dataSource.paginator.firstPage();
-    }
+  searchEvent!:Event
+  sendFilter(event: Event){
+    this.searchEvent = event
   }
 
   create() {
@@ -183,43 +136,15 @@ export class ListReservaComponent {
     dialogRef.afterClosed().subscribe(result => {
       if(result){
         this.service.create(<Reserva>result).subscribe(result => {
-          this.get()
+          this.refreshTable()
         })
       }
     });
   }
-  delete(id:string) {
-    const reservaSeleccionada = this.list.find(r => r.id == id)
-    const dialogRef = this.dialog.open(DialogConfirmComponent, {
-      data: {
-        message: 'Vas a cancelar la reserva.',
-      },
-    });
-    dialogRef.afterClosed().subscribe(result => {
-      if(result){
-        reservaSeleccionada?.cancelado == true
-        this.service.edit(id,reservaSeleccionada!).subscribe(result => {
-          this.get()
-        })
-      }
-    });
-  }
-  edit(id:string) {
-    const reservaSeleccionada = this.list.find(r => r.id == id)
-    console.log(reservaSeleccionada)
-    const dialogRef = this.dialog.open(EditReservaComponent, {
-      data: reservaSeleccionada
-    });
-    dialogRef.afterClosed().subscribe(result => {
-      console.log(`Dialog EDIT RESERVA result: ${result}`);
-      console.log(result)
-      if(result){
-        result.id = id
-        this.service.edit(id,<Reserva>result).subscribe(result => {
-          this.get()
-        })
-      }
-    });
+
+  refreshTable(){
+    this.tableMobile.get()
+    this.table.get()
   }
 
 
@@ -244,14 +169,11 @@ export class ListReservaComponent {
   removeDayFilter(){
     this.filter.dateStart = null
     this.filter.dateEnd = null
-    this.get()
   }
   removeRecursoFilter(){
     this.filter.recurso = null
-    this.get()
   }
   removeServicioFilter(){
     this.filter.servicio = null
-    this.get()
   }
 }

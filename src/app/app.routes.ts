@@ -13,6 +13,9 @@ export const routes: Routes = [
         {path: 'horarios', loadComponent: () => import('./pages/section-horarios/section-horarios.component').then(m => m.SectionHorariosComponent), pathMatch: 'full'},
         {path: 'reservas', loadComponent: () => import('./pages/section-reservas/section-reservas.component').then(m => m.SectionReservasComponent), pathMatch: 'full'},
         {path: 'perfil', loadComponent: () => import('./pages/section-perfil/section-perfil.component').then(m => m.SectionPerfilComponent), pathMatch: 'full'},
+        
+
+        {path: 'prueba', loadComponent: () => import('./components/table-reserva-mobile/table-reserva-mobile.component').then(m => m.TableReservaMobileComponent), pathMatch: 'full'},
     ]},
 
     /*
