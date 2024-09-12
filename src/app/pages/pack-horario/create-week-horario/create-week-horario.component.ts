@@ -33,11 +33,12 @@ import { EditHorarioComponent } from '../edit-horario/edit-horario.component';
 })
 export class CreateWeekHorarioComponent implements OnChanges {
 
-  @Input() programadoToEdit: string = "";
+  @Input() programadoToEdit: Date = new Date();
 
-  scheduledChangeDate = new FormControl('', [Validators.required]);
+  fechaDesde = new FormControl<Date | null>(null, [Validators.required]);
+  fechaHasta = new FormControl<Date | null>(null);
   list:Horario[] = []
-  selected:string="0"
+  minDate:Date = new Date()
 
   constructor(public dialog: MatDialog, private service:HorarioService){
     this.get()
@@ -45,17 +46,51 @@ export class CreateWeekHorarioComponent implements OnChanges {
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes['programadoToEdit']) {
+      this.fechaDesde.setValue(this.programadoToEdit)
       this.get()
     }
   }
 
+  deleteHorarioCerrado(horario:Horario){
+    const horarioCerrado = this.list.find(h => h.dia==horario.dia && h.inicio==null)
+    if(horarioCerrado){
+      this.list = this.list.filter(h => h!=horarioCerrado)
+    }
+  }
+
+  crearHorarioCerrado(dia:number){
+    const hayHorario = this.list.find(h => h.dia==dia)
+    if(!hayHorario){
+      const horarioCerrado = {
+        id:0,
+        dia:dia,
+        inicio:null,
+        cierre:null,
+        programadoDesde:new Date(),
+        programadoHasta:new Date(),
+      }
+      this.list.push(horarioCerrado)
+    }
+  }
+
   onSubmit(){
+    this.list.forEach(element => {
+      const h:any = {
+        inicio:element.inicio,
+        cierre:element.cierre,
+        dia:element.dia,
+        programadoDesde:this.fechaDesde,
+        programadoHasta:this.fechaHasta
+      }
+      this.service.create(<Horario>h).subscribe()
+    });
+    //guardar toda la lista
     console.log('Dia Cambiado')
   }
 
   get(){
     this.service.list().subscribe(result => {
-      this.list = result.filter(r => r.programado==this.programadoToEdit).sort((a, b) => a.inicio && b.inicio ? a.inicio.localeCompare(b.inicio) : a.dia);
+      this.list = result.filter(r => r.programadoDesde==this.programadoToEdit).sort((a, b) => a.inicio && b.inicio ? a.inicio.localeCompare(b.inicio) : a.dia);
     })
   }
 
@@ -67,15 +102,15 @@ export class CreateWeekHorarioComponent implements OnChanges {
     });
     dialogRef.afterClosed().subscribe(result => {
       console.log(`Dialog result: ${result}`);
+      console.log(result)
       if(result){
-        this.service.create(result).subscribe(result=>{
-          this.get()
-        });
+        this.deleteHorarioCerrado(<Horario>result)
+        this.list.push(<Horario>result)
       }
     });
   }
 
-  delete(id:number) {
+  delete(obj:Horario) {
     const dialogRef = this.dialog.open(DialogConfirmComponent, {
       data: {
         message: 'Seguro quieres eliminar el horario?.',
@@ -83,9 +118,8 @@ export class CreateWeekHorarioComponent implements OnChanges {
     });
     dialogRef.afterClosed().subscribe(result => {
       if(result){
-        this.service.delete(id).subscribe(result=>{
-          this.get()
-        });
+        this.list = this.list.filter(h => h!=obj)
+        this.crearHorarioCerrado(obj.dia)
       }
     });
   }
@@ -96,10 +130,10 @@ export class CreateWeekHorarioComponent implements OnChanges {
     });
     dialogRef.afterClosed().subscribe(result => {
       console.log(`Dialog result: ${result}`);
+      console.log(result)
       if(result){
-        this.service.edit(result).subscribe(result=>{
-          this.get()
-        });
+        this.list = this.list.filter(h => h!=obj)
+        this.list.push(<Horario>result)
       }
     });
   }

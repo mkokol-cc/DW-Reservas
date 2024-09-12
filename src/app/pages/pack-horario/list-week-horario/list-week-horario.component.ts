@@ -33,9 +33,9 @@ import { MatSelectModule } from '@angular/material/select';
 export class ListWeekHorarioComponent {
 
   list:Horario[] = []
-  selected:string=""
+  selected:Date=new Date()
   agrupadosPorProgramado:{ [key: string]: Horario[] } = {}
-  @Output() programadoToEdit = new EventEmitter<string>();
+  @Output() programadoToEdit = new EventEmitter<Date>();
 
   constructor(public dialog: MatDialog, private service:HorarioService){
     this.get()
@@ -45,7 +45,7 @@ export class ListWeekHorarioComponent {
     this.service.list().subscribe(result => {
       this.list = result.sort((a, b) => a.inicio && b.inicio ? a.inicio.localeCompare(b.inicio) : a.dia);
       this.agrupadosPorProgramado = this.list.reduce((acc, objeto) => {
-        const key = objeto.programado;
+        const key = new Date(objeto.programadoDesde).toISOString();
         // Si el grupo no existe, se crea un array vacío
         if (!acc[key]) {
           acc[key] = [];
@@ -54,8 +54,21 @@ export class ListWeekHorarioComponent {
         acc[key].push(objeto);
         return acc;
       }, {} as { [key: string]: Horario[] });
+      this.selected = new Date(Object.keys(this.agrupadosPorProgramado)[0])
+      console.log(this.selected)
       console.log(this.agrupadosPorProgramado)
     })
+  }
+
+  isSelectedDate(strDate:Date):boolean{
+    if(strDate == this.selected){
+      return true
+    }
+    return false
+  }
+  isActualHorario(strDate:string){
+    const date = new Date(strDate)
+    return (date <= new Date())
   }
 
   edit() {

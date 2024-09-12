@@ -14,10 +14,10 @@ import { FormControl } from '@angular/forms';
 })
 export class SectionHorariosComponent {
   
-  programadoToEdit:string = '';
+  programadoToEdit:Date = new Date();
   selected = new FormControl(0);
   
-  reciveProgramadoToEdit(mensaje: string) {
+  reciveProgramadoToEdit(mensaje: Date) {
     this.programadoToEdit = mensaje;
     this.selected.setValue(1)
   }
