@@ -16,3 +16,13 @@
     padding: 20px;
     text-align: center;
   }
+
+  @media (max-width: 600px) {
+    .grid-container {
+      grid-template-columns: repeat(1, 1fr); /* 1 column layout */
+    }
+  
+    .item1, .item2{
+      grid-column: span 1; /* All items take full width (1 column per row) */
+    }
+  }

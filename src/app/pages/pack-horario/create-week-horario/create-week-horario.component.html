@@ -9,7 +9,7 @@
             <mat-label>Aplicar cambios el dia</mat-label>
             <input matInput [matDatepicker]="pickerDesde" [min]="minDate" [formControl]="fechaDesde">
             @if (fechaDesde) {
-                <button matSuffix mat-icon-button aria-label="Clear" (click)="fechaDesde.setValue(null)">
+                <button matSuffix class="no-mobile" mat-icon-button aria-label="Clear" (click)="fechaDesde.setValue(null)">
                   <mat-icon>close</mat-icon>
                 </button>
             }
@@ -20,7 +20,7 @@
             <mat-label>Hasta el dia</mat-label>
             <input matInput [matDatepicker]="pickerHasta" [min]="minDate" [formControl]="fechaHasta">
             @if (fechaHasta) {
-                <button matSuffix mat-icon-button aria-label="Clear" (click)="fechaHasta.setValue(null)">
+                <button matSuffix class="no-mobile" mat-icon-button aria-label="Clear" (click)="fechaHasta.setValue(null)">
                   <mat-icon>close</mat-icon>
                 </button>
             }
@@ -51,7 +51,7 @@
                 }
             </span>
             <div matListItemMeta>
-                <button mat-icon-button color="primary" aria-label="Example icon button with a menu icon" (click)="create(1)">
+                <button mat-icon-button color="primary" (click)="create(1)">
                     <mat-icon>add_circle</mat-icon>
                 </button>
             </div>
@@ -80,7 +80,7 @@
                 }
             </span>
             <div matListItemMeta>
-                <button mat-icon-button color="primary" aria-label="Example icon button with a menu icon" (click)="create(2)">
+                <button mat-icon-button color="primary" (click)="create(2)">
                     <mat-icon>add_circle</mat-icon>
                 </button>
             </div>
@@ -109,7 +109,7 @@
                 }
             </span>
             <div matListItemMeta>
-                <button mat-icon-button color="primary" aria-label="Example icon button with a menu icon" (click)="create(3)">
+                <button mat-icon-button color="primary" (click)="create(3)">
                     <mat-icon>add_circle</mat-icon>
                 </button>
             </div>
@@ -138,7 +138,7 @@
                 }
             </span>
             <div matListItemMeta>
-                <button mat-icon-button color="primary" aria-label="Example icon button with a menu icon" (click)="create(4)">
+                <button mat-icon-button color="primary" (click)="create(4)">
                     <mat-icon>add_circle</mat-icon>
                 </button>
             </div>
@@ -167,7 +167,7 @@
                 }
             </span>
             <div matListItemMeta>
-                <button mat-icon-button color="primary" aria-label="Example icon button with a menu icon" (click)="create(5)">
+                <button mat-icon-button color="primary" (click)="create(5)">
                     <mat-icon>add_circle</mat-icon>
                 </button>
             </div>
@@ -196,7 +196,7 @@
                 }
             </span>
             <div matListItemMeta>
-                <button mat-icon-button color="primary" aria-label="Example icon button with a menu icon" (click)="create(6)">
+                <button mat-icon-button color="primary" (click)="create(6)">
                     <mat-icon>add_circle</mat-icon>
                 </button>
             </div>
@@ -225,7 +225,7 @@
                 }
             </span>
             <div matListItemMeta>
-                <button mat-icon-button color="primary" aria-label="Example icon button with a menu icon" (click)="create(0)">
+                <button mat-icon-button color="primary" (click)="create(0)">
                     <mat-icon>add_circle</mat-icon>
                 </button>
             </div>
