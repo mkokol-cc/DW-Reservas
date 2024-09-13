@@ -1,0 +1,7 @@
+.mat-calendar-body-disabled{
+    border-radius: 50%;
+    background-color: #ff5722;
+}
+.mat-calendar-body-disabled span{
+    color: var(--mat-datepicker-calendar-date-text-color);
+}

@@ -3,7 +3,17 @@
         <mat-card-title>Dias No Laborales</mat-card-title>
     </mat-card-header>
     <mat-card-content>
-        <mat-calendar [(selected)]="selected" [minDate]="minDate"></mat-calendar>
+        @for (day of list; track day) {
+            <p>
+                <mat-chip-row>
+                    {{day | date:'dd/MM/yyyy' }}
+                    <button matChipRemove (click)="removeDay(day)">
+                      <mat-icon>cancel</mat-icon>
+                    </button>
+                </mat-chip-row>
+            </p>
+        }
+        <mat-calendar [(selected)]="selected" [minDate]="minDate" [dateFilter]="filtrarFechas"></mat-calendar>
         <p>{{selected  | date:'dd/MM/yyyy' }}</p>
         <button mat-flat-button color="primary" type="submit" [disabled]="!selected" (click)="newInactivo()">Hacer No Laboral</button>
     </mat-card-content>
