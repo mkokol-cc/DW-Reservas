@@ -13,7 +13,7 @@ import { loaderInterceptor } from './interceptors/loader.interceptor';
 
 export const appConfig: ApplicationConfig = {
   providers: [provideRouter(routes), provideAnimationsAsync(), provideToastr(), provideAnimations(),
-
+    
     provideHttpClient(withInterceptors([loaderInterceptor,notificationsInterceptor])),
     importProvidersFrom(HttpClientInMemoryWebApiModule.forRoot(
       InMemoryDataService, { dataEncapsulation: false, delay: 1000 }

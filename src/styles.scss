@@ -1,3 +1,25 @@
+// Importa los temas de Angular Material
+@use '@angular/material' as mat;
+
+// Define la paleta primary usando el color por defecto de warn
+$my-primary-palette: mat.define-palette(mat.$cyan-palette);
+
+// Define la paleta warn usando el color por defecto de primary
+$my-warn-palette: mat.define-palette(mat.$deep-orange-palette);
+
+// Define el tema personalizado intercambiando primary y warn
+$my-custom-theme: mat.define-dark-theme((
+  color: (
+    primary: $my-primary-palette,
+    accent: mat.define-palette(mat.$green-palette),
+    warn: $my-warn-palette,
+  ),
+  typography: mat.define-typography-config(),
+));
+
+// Aplica el tema a todos los componentes de Angular Material
+@include mat.all-component-themes($my-custom-theme);
+
 /* You can add global styles to this file, and also import other style files */
 @import 'ngx-toastr/toastr';
 

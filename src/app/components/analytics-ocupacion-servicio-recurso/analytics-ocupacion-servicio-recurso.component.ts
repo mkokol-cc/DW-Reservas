@@ -2,7 +2,7 @@ import { Component, ElementRef } from '@angular/core';
 import { Chart, registerables } from 'chart.js';
 import { ReservaService } from '../../services/reserva.service';
 import { Reserva } from '../../interfaces/reserva';
-import { MatRadioModule } from '@angular/material/radio';
+import { MAT_RADIO_DEFAULT_OPTIONS, MatRadioModule } from '@angular/material/radio';
 import { FormsModule } from '@angular/forms';
 import { MatCardModule } from '@angular/material/card';
 Chart.register(...registerables)
@@ -10,6 +10,10 @@ Chart.register(...registerables)
 @Component({
   selector: 'app-analytics-ocupacion-servicio-recurso',
   standalone: true,
+  providers: [{
+    provide: MAT_RADIO_DEFAULT_OPTIONS,
+    useValue: { color: 'primary' },
+  }],
   imports: [MatRadioModule, FormsModule, MatCardModule],
   templateUrl: './analytics-ocupacion-servicio-recurso.component.html',
   styleUrl: './analytics-ocupacion-servicio-recurso.component.scss'
