@@ -29,7 +29,8 @@ export class AnalyticsHistorialReservasComponent implements AfterViewInit{
         datasets: [
           {
             data: [134,120,111,123,140,92],
-            backgroundColor: '#c1ff5b',
+            backgroundColor: '#ff974a',
+            label: 'Reservas'
           }
         ]
       },

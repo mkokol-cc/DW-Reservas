@@ -67,7 +67,7 @@ export class AnalyticsTasaOcupacionComponent {
           },
           title: {
             display: true,
-            text: 'Chart.js Doughnut Chart'
+            text: 'En Los Proximos 15 Dias'
           }
         }
       },

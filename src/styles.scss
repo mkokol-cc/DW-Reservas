@@ -1,6 +1,12 @@
 // Importa los temas de Angular Material
 @use '@angular/material' as mat;
 
+
+// Define la tipografía personalizada usando Rubik
+$my-custom-typography: mat.define-typography-config(
+  $font-family: 'Rubik, sans-serif',
+);
+
 // Define la paleta primary usando el color por defecto de warn
 $my-primary-palette: mat.define-palette(mat.$cyan-palette);
 
@@ -14,7 +20,8 @@ $my-custom-theme: mat.define-dark-theme((
     accent: mat.define-palette(mat.$green-palette),
     warn: $my-warn-palette,
   ),
-  typography: mat.define-typography-config(),
+  typography: $my-custom-typography,
+  //typography: mat.define-typography-config(),
 ));
 
 // Aplica el tema a todos los componentes de Angular Material
@@ -46,4 +53,9 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     .section-page{
         padding: 0 !important;
     }
+}
+
+
+mat-card, mat-card mat-card-content{
+    height: 100% !important;
 }
