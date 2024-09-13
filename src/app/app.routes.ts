@@ -1,6 +1,5 @@
 import { Routes } from '@angular/router';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
-import { ListServicioComponent } from './pages/pack-servicio/list-servicio/list-servicio.component';
 
 export const routes: Routes = [
 
@@ -15,7 +14,7 @@ export const routes: Routes = [
         {path: 'perfil', loadComponent: () => import('./pages/section-perfil/section-perfil.component').then(m => m.SectionPerfilComponent), pathMatch: 'full'},
         
 
-        {path: 'prueba', loadComponent: () => import('./components/table-reserva-mobile/table-reserva-mobile.component').then(m => m.TableReservaMobileComponent), pathMatch: 'full'},
+        {path: '', loadComponent: () => import('./pages/section-reservas/section-reservas.component').then(m => m.SectionReservasComponent), pathMatch: 'full'},
     ]},
 
     /*

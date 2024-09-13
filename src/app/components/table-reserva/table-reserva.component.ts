@@ -10,6 +10,7 @@ import { Reserva } from '../../interfaces/reserva';
 import { EditReservaComponent } from '../../pages/pack-reserva/edit-reserva/edit-reserva.component';
 import { ReservaService } from '../../services/reserva.service';
 import { DialogConfirmComponent } from '../dialog-confirm/dialog-confirm.component';
+import { ToastrService } from 'ngx-toastr';
 
 export interface RegistroTabla {
   id: number;
@@ -58,7 +59,7 @@ export class TableReservaComponent implements OnChanges {
     estado: null,
   }
   
-  constructor(private service:ReservaService,public dialog: MatDialog){
+  constructor(private service:ReservaService,public dialog: MatDialog,private toastr: ToastrService){
     this.get()
   }
 
@@ -140,6 +141,7 @@ export class TableReservaComponent implements OnChanges {
         reservaSeleccionada?.cancelado == true
         this.service.edit(id,reservaSeleccionada!).subscribe(result => {
           this.get()
+          this.toastr.success('Se ha cancelado correctamente la reserva!','Genial!');
         })
       }
     });
@@ -157,6 +159,7 @@ export class TableReservaComponent implements OnChanges {
         result.id = id
         this.service.edit(id,<Reserva>result).subscribe(result => {
           this.get()
+          this.toastr.success('Se ha editado correctamente la reserva!','Genial!');
         })
       }
     });

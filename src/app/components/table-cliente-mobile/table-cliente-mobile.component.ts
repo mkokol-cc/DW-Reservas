@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges, SimpleChanges, ViewChild } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { MatSort, MatSortModule } from '@angular/material/sort';
@@ -9,6 +9,7 @@ import { DialogConfirmComponent } from '../dialog-confirm/dialog-confirm.compone
 import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-table-cliente-mobile',
@@ -35,7 +36,7 @@ export class TableClienteMobileComponent implements OnChanges {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
-  constructor( private service:ClienteService , public dialog: MatDialog){
+  constructor( private service:ClienteService , public dialog: MatDialog,private toastr: ToastrService){
     this.get()
   }
 
@@ -65,6 +66,8 @@ export class TableClienteMobileComponent implements OnChanges {
         cliente.habilitado = false
         this.service.edit(cliente.id,cliente).subscribe(result => {
           this.get()
+          this.notificarPadre()
+          this.toastr.success('Se ha editado correctamente el cliente!','Genial!');
         })
       }
     });
@@ -79,5 +82,10 @@ export class TableClienteMobileComponent implements OnChanges {
     }
   }
 
+
+  @Output() refresh = new EventEmitter<void>();
+  notificarPadre() {
+    this.refresh.emit(); // Emite un evento para que el padre lo capture
+  }
   
 }

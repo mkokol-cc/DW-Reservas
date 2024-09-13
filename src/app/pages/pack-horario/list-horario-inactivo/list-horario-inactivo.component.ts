@@ -7,6 +7,7 @@ import { HorarioService } from '../../../services/horario.service';
 import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 import { MatChipsModule } from '@angular/material/chips';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-list-horario-inactivo',
@@ -32,6 +33,8 @@ export class ListHorarioInactivoComponent {
     new Date(2025, 0, 1)
   ]
 
+  constructor(private service:HorarioService,private toastr: ToastrService){}
+
   filtrarFechas = (d: Date | null): boolean => {
     const fecha = d || new Date();
     return !this.list.some(f => 
@@ -49,9 +52,6 @@ export class ListHorarioInactivoComponent {
     );
     this.refreshCalendar()
   }
-  
-
-  constructor(private service:HorarioService){}
 
   newInactivo(){/*
     const horario = {
@@ -71,6 +71,7 @@ export class ListHorarioInactivoComponent {
       this.list.push(day)
       this.refreshCalendar()
       this.selected = null
+      this.toastr.success('Se ha creado correctamente el horario!','Genial!');
     }
   }
 

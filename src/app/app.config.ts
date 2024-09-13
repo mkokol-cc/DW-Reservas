@@ -12,11 +12,27 @@ import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import { loaderInterceptor } from './interceptors/loader.interceptor';
 
 export const appConfig: ApplicationConfig = {
-  providers: [provideRouter(routes), provideAnimationsAsync(), provideToastr(), provideAnimations(),
-    
-    provideHttpClient(withInterceptors([loaderInterceptor,notificationsInterceptor])),
-    importProvidersFrom(HttpClientInMemoryWebApiModule.forRoot(
-      InMemoryDataService, { dataEncapsulation: false, delay: 1000 }
-    )),//api fake con 1 segundo de delay
+  providers: [
+    provideRouter(routes), 
+    provideAnimationsAsync(), 
+      provideToastr({
+      timeOut: 10000,
+      positionClass: 'toast-bottom-right',
+      preventDuplicates: true,
+    }), 
+    provideAnimations(),
+    provideHttpClient(
+      withInterceptors([
+        loaderInterceptor,notificationsInterceptor
+      ])
+    ),
+    importProvidersFrom(
+      HttpClientInMemoryWebApiModule.forRoot(
+        InMemoryDataService, { 
+          dataEncapsulation: false, 
+          delay: 1000 
+        }
+      )
+    ),//api fake con 1 segundo de delay
   ]
 };

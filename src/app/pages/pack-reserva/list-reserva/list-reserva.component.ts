@@ -27,6 +27,7 @@ import { DialogConfirmComponent } from '../../../components/dialog-confirm/dialo
 import { EditReservaComponent } from '../edit-reserva/edit-reserva.component';
 import { TableReservaComponent } from '../../../components/table-reserva/table-reserva.component';
 import { TableReservaMobileComponent } from '../../../components/table-reserva-mobile/table-reserva-mobile.component';
+import { ToastrService } from 'ngx-toastr';
 
 export interface RegistroTabla {
   id: number;
@@ -92,7 +93,7 @@ export class ListReservaComponent {
   constructor(private service:ReservaService, 
     private recursoService:RecursoService, 
     private servicioService:ServicioService,
-    public dialog: MatDialog) {
+    public dialog: MatDialog,private toastr: ToastrService) {
       this.dayRange.valueChanges.subscribe(val => {
         if (val.start && val.end) {
           console.log('Rango de fechas seleccionado:', val);
@@ -137,6 +138,7 @@ export class ListReservaComponent {
       if(result){
         this.service.create(<Reserva>result).subscribe(result => {
           this.refreshTable()
+          this.toastr.success('Se ha creado correctamente la reserva!','Genial!');
         })
       }
     });

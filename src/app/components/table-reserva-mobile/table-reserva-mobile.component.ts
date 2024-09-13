@@ -10,6 +10,7 @@ import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
 import { EditReservaComponent } from '../../pages/pack-reserva/edit-reserva/edit-reserva.component';
 import { DialogConfirmComponent } from '../dialog-confirm/dialog-confirm.component';
+import { ToastrService } from 'ngx-toastr';
 
 
 export interface RegistroTabla {
@@ -60,7 +61,7 @@ export class TableReservaMobileComponent implements OnChanges {
     estado: null,
   }
   
-  constructor(private service:ReservaService,public dialog: MatDialog){
+  constructor(private service:ReservaService,public dialog: MatDialog, private toastr: ToastrService){
     this.get()
   }
 
@@ -142,6 +143,7 @@ export class TableReservaMobileComponent implements OnChanges {
         reservaSeleccionada?.cancelado == true
         this.service.edit(id,reservaSeleccionada!).subscribe(result => {
           this.get()
+          this.toastr.success('Se ha cancelado correctamente la reserva!','Genial!');
         })
       }
     });
@@ -159,6 +161,7 @@ export class TableReservaMobileComponent implements OnChanges {
         result.id = id
         this.service.edit(id,<Reserva>result).subscribe(result => {
           this.get()
+          this.toastr.success('Se ha editado correctamente la reserva!','Genial!');
         })
       }
     });

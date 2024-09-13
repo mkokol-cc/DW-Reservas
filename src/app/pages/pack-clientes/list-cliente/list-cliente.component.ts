@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, EventEmitter, Output, ViewChild } from '@angular/core';
 import { Cliente } from '../../../interfaces/cliente';
 import { ClienteService } from '../../../services/cliente.service';
 import { CommonModule } from '@angular/common';
@@ -10,6 +10,7 @@ import { DialogConfirmComponent } from '../../../components/dialog-confirm/dialo
 import { MatDialog } from '@angular/material/dialog';
 import { TableClienteComponent } from '../../../components/table-cliente/table-cliente.component';
 import { TableClienteMobileComponent } from '../../../components/table-cliente-mobile/table-cliente-mobile.component';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-list-cliente',
@@ -27,26 +28,16 @@ import { TableClienteMobileComponent } from '../../../components/table-cliente-m
   styleUrl: './list-cliente.component.scss'
 })
 export class ListClienteComponent {
+
+  @Output() refresh = new EventEmitter<void>();
+  notify() {
+    this.refreshTable()
+    this.refresh.emit(); // Emite un evento para que el padre lo capture
+  }
   
   @ViewChild(TableClienteMobileComponent) tableMobile!: TableClienteMobileComponent;
   @ViewChild(TableClienteComponent) table!: TableClienteComponent;
-  constructor( private service:ClienteService , public dialog: MatDialog){}
-
-  toBlackList(cliente:Cliente){
-    const dialogRef = this.dialog.open(DialogConfirmComponent, {
-      data: {
-        message: 'Vas a enviar al cliente '+cliente.apellido+', '+cliente.nombre+' a la lista negra.',
-      },
-    });
-    dialogRef.afterClosed().subscribe(result => {
-      if(result){
-        cliente.habilitado = false
-        this.service.edit(cliente.id,cliente).subscribe(result => {
-          this.refreshTable()
-        })
-      }
-    });
-  }
+  constructor( private service:ClienteService , public dialog: MatDialog,private toastr: ToastrService){}
 
   refreshTable(){
     this.tableMobile.get()
@@ -57,5 +48,6 @@ export class ListClienteComponent {
   sendFilter(event:Event){
     this.eventFilter = event
   }
+
 
 }

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { Cliente } from '../../../interfaces/cliente';
 import { ClienteService } from '../../../services/cliente.service';
 import { MatButtonModule } from '@angular/material/button';
@@ -9,6 +9,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 import { MatCardModule } from '@angular/material/card';
 import { DialogConfirmComponent } from '../../../components/dialog-confirm/dialog-confirm.component';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-list-blacklist-cliente',
@@ -23,7 +24,7 @@ export class ListBlacklistClienteComponent {
 
   list:Cliente[]=[]
 
-  constructor( private service:ClienteService,public dialog: MatDialog){
+  constructor( private service:ClienteService,public dialog: MatDialog,private toastr: ToastrService){
     this.get()
   }
 
@@ -38,6 +39,8 @@ export class ListBlacklistClienteComponent {
         cliente.habilitado = true
         this.service.edit(cliente.id,cliente).subscribe(result => {
           this.get()
+          this.notificarPadre()
+          this.toastr.success('Se ha editado correctamente el cliente!','Genial!');
         })
       }
     });
@@ -47,5 +50,10 @@ export class ListBlacklistClienteComponent {
     this.service.list().subscribe(result => {
       this.list = result.filter(c=>!c.habilitado)//.sort((a, b) => a.inicio.localeCompare(b.inicio));
     })
+  }
+
+  @Output() refresh = new EventEmitter<void>();
+  notificarPadre() {
+    this.refresh.emit(); // Emite un evento para que el padre lo capture
   }
 }

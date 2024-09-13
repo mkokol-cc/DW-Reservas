@@ -19,6 +19,7 @@ import { Horario } from '../../../interfaces/horario';
 import { HorarioService } from '../../../services/horario.service';
 import { CreateHorarioComponent } from '../create-horario/create-horario.component';
 import { EditHorarioComponent } from '../edit-horario/edit-horario.component';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-create-week-horario',
@@ -40,7 +41,7 @@ export class CreateWeekHorarioComponent implements OnChanges {
   list:Horario[] = []
   minDate:Date = new Date()
 
-  constructor(public dialog: MatDialog, private service:HorarioService){
+  constructor(public dialog: MatDialog, private service:HorarioService,private toastr: ToastrService){
     this.get()
   }
 
@@ -84,10 +85,11 @@ export class CreateWeekHorarioComponent implements OnChanges {
       }
       //console.log(h)
       //JSON.stringify(h)
-      this.service.create(<Horario>h).subscribe()
+      //this.service.create(<Horario>h).subscribe()
     });
     //guardar toda la lista
     console.log('Dia Cambiado')
+    this.toastr.success('Se ha creado correctamente el horario!','Genial!');
   }
 
   get(){

@@ -12,10 +12,10 @@
 
 
     <div id="table-container">
-      <app-table-cliente [busqueda]="eventFilter"></app-table-cliente>
+      <app-table-cliente [busqueda]="eventFilter" (refresh)="notify()"></app-table-cliente>
     </div>
     <div id="table-mobile-container">
-      <app-table-cliente-mobile [busqueda]="eventFilter"></app-table-cliente-mobile>
+      <app-table-cliente-mobile [busqueda]="eventFilter" (refresh)="notify()"></app-table-cliente-mobile>
     </div>
 
 
