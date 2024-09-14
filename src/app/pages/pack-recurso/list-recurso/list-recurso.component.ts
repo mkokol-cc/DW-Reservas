@@ -51,7 +51,7 @@ export class ListRecursoComponent {
       if(result){
         this.service.create(<Recurso>result).subscribe(result => {
           this.get()
-          this.toastr.success('Se ha creado correctamente el recurso!','Genial!');
+          this.toastr.success('Se creó correctamente el recurso!','Genial!');
         })
       }
     });
@@ -67,10 +67,10 @@ export class ListRecursoComponent {
       //console.log('The dialog was closed');
       //this.animal = result;
       if(result){
-        //this.toastr.success('Se elimino correctamente el servicio!','Genial!');
+        //this.toastr.success('Se eliminó correctamente el servicio!','Genial!');
         this.service.delete(obj.id).subscribe(result => {
           this.get()
-          this.toastr.success('Se ha eliminado correctamente el recurso!','Genial!');
+          this.toastr.success('Se eliminó correctamente el recurso!','Genial!');
         })
       }
     });
@@ -86,7 +86,7 @@ export class ListRecursoComponent {
       if(result){
         this.service.edit(obj.id,<Recurso>result).subscribe(result => {
           this.get()
-          this.toastr.success('Se ha editado correctamente el recurso!','Genial!');
+          this.toastr.success('Se editó correctamente el recurso!','Genial!');
         })
       }
     });

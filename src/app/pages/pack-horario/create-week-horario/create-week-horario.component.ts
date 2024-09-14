@@ -88,8 +88,8 @@ export class CreateWeekHorarioComponent implements OnChanges {
       //this.service.create(<Horario>h).subscribe()
     });
     //guardar toda la lista
-    console.log('Dia Cambiado')
-    this.toastr.success('Se ha creado correctamente el horario!','Genial!');
+    //console.log('Dia Cambiado')
+    this.toastr.success('Se creó correctamente el horario!','Genial!');
   }
 
   get(){

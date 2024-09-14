@@ -26,7 +26,7 @@ export class CreateHorarioComponent {
   onSubmit(){
     if (this.form.valid) {
       console.log(<Horario>this.form.value)
-      //this.toastr.success('Se edito correctamente el recurso!','Genial!');
+      //this.toastr.success('Se editó correctamente el recurso!','Genial!');
     }
   }
 }

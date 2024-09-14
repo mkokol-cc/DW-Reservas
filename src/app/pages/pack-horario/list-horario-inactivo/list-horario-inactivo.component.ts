@@ -71,7 +71,7 @@ export class ListHorarioInactivoComponent {
       this.list.push(day)
       this.refreshCalendar()
       this.selected = null
-      this.toastr.success('Se ha creado correctamente el horario!','Genial!');
+      this.toastr.success('Se creó correctamente el horario!','Genial!');
     }
   }
 

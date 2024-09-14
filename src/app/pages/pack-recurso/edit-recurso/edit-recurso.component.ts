@@ -31,7 +31,7 @@ export class EditRecursoComponent {
   onSubmit(){
     if (this.form.valid) {
       console.log(<Recurso>this.form.value)
-      this.toastr.success('Se edito correctamente el recurso!','Genial!');
+      this.toastr.success('Se editó correctamente el recurso!','Genial!');
     }
   }
 }

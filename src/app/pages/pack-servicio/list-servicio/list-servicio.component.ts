@@ -51,7 +51,7 @@ export class ListServicioComponent {
       if(result){
         this.service.create(<Servicio>result).subscribe(result => {
           this.get()
-          this.toastr.success('Se ha creado correctamente el servicio!','Genial!');
+          this.toastr.success('Se creó correctamente el servicio!','Genial!');
         })
       }
     });
@@ -67,10 +67,10 @@ export class ListServicioComponent {
       //console.log('The dialog was closed');
       //this.animal = result;
       if(result){
-        //this.toastr.success('Se elimino correctamente el servicio!','Genial!');
+        //this.toastr.success('Se eliminó correctamente el servicio!','Genial!');
         this.service.delete(obj.id).subscribe(result => {
           this.get()
-          this.toastr.success('Se ha eliminado correctamente el servicio!','Genial!');
+          this.toastr.success('Se eliminó correctamente el servicio!','Genial!');
         })
       }
     });
@@ -86,7 +86,7 @@ export class ListServicioComponent {
         result.id = obj.id
         this.service.edit(obj.id,<Servicio>result).subscribe(result => {
           this.get()
-          this.toastr.success('Se ha editado correctamente el servicio!','Genial!');
+          this.toastr.success('Se editó correctamente el servicio!','Genial!');
         })
       }
     });

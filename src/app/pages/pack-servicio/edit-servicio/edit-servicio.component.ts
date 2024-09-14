@@ -35,7 +35,7 @@ export class EditServicioComponent {
   onSubmit(){
     if (this.form.valid) {
       console.log(<Servicio>this.form.value)
-      this.toastr.success('Se edito correctamente el servicio!','Genial!');
+      this.toastr.success('Se editó correctamente el servicio!','Genial!');
     }
   }
 }

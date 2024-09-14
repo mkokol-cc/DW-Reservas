@@ -161,7 +161,7 @@ export class TableReservaMobileComponent implements OnChanges {
         result.id = id
         this.service.edit(id,<Reserva>result).subscribe(result => {
           this.get()
-          this.toastr.success('Se ha editado correctamente la reserva!','Genial!');
+          this.toastr.success('Se editó correctamente la reserva!','Genial!');
         })
       }
     });

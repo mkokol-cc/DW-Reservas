@@ -40,7 +40,7 @@ export class ListBlacklistClienteComponent {
         this.service.edit(cliente.id,cliente).subscribe(result => {
           this.get()
           this.notificarPadre()
-          this.toastr.success('Se ha editado correctamente el cliente!','Genial!');
+          this.toastr.success('Se editó correctamente el cliente!','Genial!');
         })
       }
     });

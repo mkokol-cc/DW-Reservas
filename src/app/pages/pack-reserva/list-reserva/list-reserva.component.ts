@@ -138,7 +138,7 @@ export class ListReservaComponent {
       if(result){
         this.service.create(<Reserva>result).subscribe(result => {
           this.refreshTable()
-          this.toastr.success('Se ha creado correctamente la reserva!','Genial!');
+          this.toastr.success('Se creó correctamente la reserva!','Genial!');
         })
       }
     });

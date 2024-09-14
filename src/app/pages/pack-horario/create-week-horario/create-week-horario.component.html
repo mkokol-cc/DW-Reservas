@@ -4,7 +4,7 @@
     
     <form (ngSubmit)="onSubmit()">
         <!--<h4>{{programadoToEdit}}</h4>-->
-        <p>Cualquier cambio en los horarios sera programado para la fecha seleccionada. las reservas posteriores a ese dia que no cumplan con los nuevos horarios serán canceladas.</p>
+        <p>Cualquier cambio en los horarios sera programado para la fecha seleccionada. las reservas posteriores a ese día que no cumplan con los nuevos horarios serán canceladas.</p>
         <mat-form-field>
             <mat-label>Aplicar cambios el dia</mat-label>
             <input matInput [matDatepicker]="pickerDesde" [min]="minDate" [formControl]="fechaDesde">
