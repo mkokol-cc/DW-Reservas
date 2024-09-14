@@ -11,16 +11,16 @@
         </mat-form-field>
 
         <mat-form-field>
-            <mat-label>Descripcion</mat-label>
+            <mat-label>Descripción</mat-label>
             <input matInput placeholder="Breve descripción del servicio" formControlName="descripcion">
         </mat-form-field>
 
         <mat-form-field floatLabel="always">
-            <mat-label>Duracion</mat-label>
+            <mat-label>Duración</mat-label>
             <input matInput type="number" min="0" max="1440" placeholder="0" formControlName="duracion">
             <span matTextSuffix>minutos</span>
             @if (form.get('duracion')!.invalid) {
-                <mat-error>Ingrese una duracion entre 0 y 1440 minutos</mat-error>
+                <mat-error>Ingrese una duración entre 0 y 1440 minutos</mat-error>
             }
         </mat-form-field>
 
@@ -35,7 +35,7 @@
         </mat-form-field>
 
         <mat-form-field floatLabel="always">
-            <mat-label>Precio Maximo</mat-label>
+            <mat-label>Precio Máximo</mat-label>
             <input matInput type="number" min="0" placeholder="0" formControlName="precioMaximo">
             <span matTextPrefix>$&nbsp;</span>
             <span matTextSuffix>.00</span>
@@ -45,7 +45,7 @@
         </mat-form-field>
 
         <mat-form-field floatLabel="always">
-            <mat-label>Pago Anticipado</mat-label>
+            <mat-label>Precio Seña</mat-label>
             <input matInput type="number" min="0" placeholder="0" formControlName="precioSenia">
             <span matTextPrefix>$&nbsp;</span>
             <span matTextSuffix>.00</span>
