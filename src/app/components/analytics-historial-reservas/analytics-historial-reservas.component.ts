@@ -1,12 +1,18 @@
 import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
+import { MatIconModule } from '@angular/material/icon';
+import { MatTooltipModule } from '@angular/material/tooltip';
 import { Chart, registerables } from 'chart.js';
 Chart.register(...registerables);
 
 @Component({
   selector: 'app-analytics-historial-reservas',
   standalone: true,
-  imports: [MatCardModule],
+  imports: [
+    MatCardModule,
+    MatIconModule,
+    MatTooltipModule
+  ],
   templateUrl: './analytics-historial-reservas.component.html',
   styleUrl: './analytics-historial-reservas.component.scss'
 })

@@ -1,5 +1,14 @@
 <mat-card class="mat-elevation-z8">
-    <mat-card-title>Datos Históricos</mat-card-title>
+    <mat-card-title>
+        <div style="padding: 0 20px; position: relative;">
+            Datos Históricos
+            <div style="position: absolute; top: 4px;right: 4px;">
+                <mat-icon fontIcon="help" (click)="elementTooltip.toggle()" #elementTooltip="matTooltip"
+                matTooltip="NOSE QUE PONER ACA."
+                ></mat-icon>
+            </div>
+        </div>
+    </mat-card-title>
     <mat-card-content>
         <canvas #bar id="bar" width="250" height="160"></canvas>
     </mat-card-content>

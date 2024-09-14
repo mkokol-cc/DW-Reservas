@@ -11,11 +11,21 @@ import { Servicio } from '../../interfaces/servicio';
 import { RecursoService } from '../../services/recurso.service';
 import { ReservaService } from '../../services/reserva.service';
 import { ServicioService } from '../../services/servicio.service';
+import { MatIconModule } from '@angular/material/icon';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 @Component({
   selector: 'app-analytics-tasa-ocupacion',
   standalone: true,
-  imports: [MatCardModule,MatFormFieldModule, MatSelectModule, MatInputModule, FormsModule],
+  imports: [
+    MatCardModule,
+    MatFormFieldModule, 
+    MatSelectModule, 
+    MatInputModule, 
+    FormsModule,
+    MatIconModule,
+    MatTooltipModule
+  ],
   templateUrl: './analytics-tasa-ocupacion.component.html',
   styleUrl: './analytics-tasa-ocupacion.component.scss'
 })
@@ -67,7 +77,7 @@ export class AnalyticsTasaOcupacionComponent {
           },
           title: {
             display: true,
-            text: 'En Los Proximos 15 Dias'
+            text: 'En Los Próximos 15 Dias'
           }
         }
       },

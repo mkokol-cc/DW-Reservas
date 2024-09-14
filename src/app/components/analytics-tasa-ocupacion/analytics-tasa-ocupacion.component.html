@@ -1,5 +1,14 @@
 <mat-card class="mat-elevation-z8">
-    <mat-card-title>Ocupación</mat-card-title>
+    <mat-card-title>
+        <div style="padding: 0 20px; position: relative;">
+            Ocupación
+            <div style="position: absolute; top: 4px;right: 4px;">
+                <mat-icon fontIcon="help" (click)="elementTooltip.toggle()" #elementTooltip="matTooltip"
+                matTooltip="Indica el porcentaje de reservas se hacen en comparación con la capacidad disponible."
+                ></mat-icon>
+            </div>
+        </div>
+    </mat-card-title>
     <mat-card-content>
         <canvas id="doughnut"></canvas>
         <mat-form-field>

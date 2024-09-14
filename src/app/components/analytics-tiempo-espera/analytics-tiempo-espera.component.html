@@ -1,4 +1,13 @@
 <mat-card class="mat-elevation-z8">
-    <mat-card-title>Tiempo Espera</mat-card-title>
+    <mat-card-title>
+        <div style="padding: 0 20px; position: relative;">
+            Tiempo Espera
+            <div style="position: absolute; top: 4px;right: 4px;">
+                <mat-icon fontIcon="help" (click)="elementTooltip.toggle()" #elementTooltip="matTooltip"
+                matTooltip="Calcula el tiempo que un cliente espera entre el momento que hace reserva y el servicio, para mejorar la eficiencia operativa."
+                ></mat-icon>
+            </div>
+        </div>
+    </mat-card-title>
     <mat-card-content>5 Dias</mat-card-content>
 </mat-card>

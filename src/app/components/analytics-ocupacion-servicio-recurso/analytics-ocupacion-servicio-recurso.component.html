@@ -1,5 +1,14 @@
 <mat-card class="mat-elevation-z8">
-    <mat-card-title>Distribución de Reservas</mat-card-title>
+    <mat-card-title>
+        <div style="padding: 0 20px; position: relative;">
+            Distribución de Reservas
+            <div style="position: absolute; top: 4px;right: 4px;">
+                <mat-icon fontIcon="help" (click)="elementTooltip.toggle()" #elementTooltip="matTooltip"
+                matTooltip="Muestra qué recursos o servicios son más demandados, lo que puede ayudar a priorizar o ajustar recursos."
+                ></mat-icon>
+            </div>
+        </div>
+    </mat-card-title>
     <mat-card-content>
         <mat-radio-group [(ngModel)]="byServicio" (change)="radioChange($event)">
             <mat-radio-button [value]="true">Servicios</mat-radio-button>

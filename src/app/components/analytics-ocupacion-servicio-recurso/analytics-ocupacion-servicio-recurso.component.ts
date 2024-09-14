@@ -5,6 +5,8 @@ import { Reserva } from '../../interfaces/reserva';
 import { MAT_RADIO_DEFAULT_OPTIONS, MatRadioModule } from '@angular/material/radio';
 import { FormsModule } from '@angular/forms';
 import { MatCardModule } from '@angular/material/card';
+import { MatIconModule } from '@angular/material/icon';
+import { MatTooltipModule } from '@angular/material/tooltip';
 Chart.register(...registerables)
 
 @Component({
@@ -14,7 +16,13 @@ Chart.register(...registerables)
     provide: MAT_RADIO_DEFAULT_OPTIONS,
     useValue: { color: 'primary' },
   }],
-  imports: [MatRadioModule, FormsModule, MatCardModule],
+  imports: [
+    MatRadioModule, 
+    FormsModule, 
+    MatCardModule,
+    MatIconModule,
+    MatTooltipModule
+  ],
   templateUrl: './analytics-ocupacion-servicio-recurso.component.html',
   styleUrl: './analytics-ocupacion-servicio-recurso.component.scss'
 })

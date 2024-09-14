@@ -1,4 +1,13 @@
 <mat-card class="mat-elevation-z8">
-    <mat-card-title>Nuevos Clientes</mat-card-title>
+    <mat-card-title>
+        <div style="padding: 0 20px; position: relative;">
+            Nuevos Clientes
+            <div style="position: absolute; top: 4px;right: 4px;">
+                <mat-icon fontIcon="help" (click)="elementTooltip.toggle()" #elementTooltip="matTooltip"
+                matTooltip="Muestra la cantidad de nuevos clientes en el ultimo mes, para evaluar el impacto de campañas de marketing o referidos."
+                ></mat-icon>
+            </div>
+        </div>
+    </mat-card-title>
     <mat-card-content>14</mat-card-content>
 </mat-card>

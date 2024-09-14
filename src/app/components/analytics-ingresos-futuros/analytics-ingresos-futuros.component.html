@@ -1,5 +1,14 @@
 <mat-card class="mat-elevation-z8">
-    <mat-card-title>Ingresos Futuros</mat-card-title>
+    <mat-card-title>
+        <div style="padding: 0 20px; position: relative;">
+            Ingresos Futuros
+            <div style="position: absolute; top: 4px;right: 4px;">
+                <mat-icon fontIcon="help" (click)="elementTooltip.toggle()" #elementTooltip="matTooltip"
+                matTooltip="Proyección de ingresos basado en las reservas futuras, y promedio de ingresos por reserva para evaluar el valor de cada reserva y optimizar precios o paquetes."
+                ></mat-icon>
+            </div>
+        </div>
+    </mat-card-title>
     <mat-card-subtitle>Reservas: 123 - Ingresos Esperados: $123123</mat-card-subtitle>
     <mat-card-content>
         <canvas id="line-chart"></canvas>

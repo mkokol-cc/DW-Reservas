@@ -1,4 +1,13 @@
 <mat-card class="mat-elevation-z8">
-    <mat-card-title>Tasa De Cancelación</mat-card-title>
+    <mat-card-title>
+        <div style="padding: 0 20px; position: relative;">
+            Tasa De Cancelación
+            <div style="position: absolute; top: 4px;right: 4px;">
+                <mat-icon fontIcon="help" (click)="elementTooltip.toggle()" #elementTooltip="matTooltip"
+                matTooltip="Mide cuántas reservas son canceladas o no se presentan, lo que puede indicar la necesidad de mejorar recordatorios o políticas de cancelación."
+                ></mat-icon>
+            </div>
+        </div>
+    </mat-card-title>
     <mat-card-content>3.2%</mat-card-content>
 </mat-card>

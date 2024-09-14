@@ -11,11 +11,21 @@ import { FormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
+import { MatIconModule } from '@angular/material/icon';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 @Component({
   selector: 'app-analytics-ingresos-futuros',
   standalone: true,
-  imports: [MatCardModule,MatFormFieldModule, MatSelectModule, MatInputModule, FormsModule],
+  imports: [
+    MatCardModule,
+    MatFormFieldModule, 
+    MatSelectModule, 
+    MatInputModule, 
+    FormsModule,
+    MatIconModule,
+    MatTooltipModule
+  ],
   templateUrl: './analytics-ingresos-futuros.component.html',
   styleUrl: './analytics-ingresos-futuros.component.scss'
 })
