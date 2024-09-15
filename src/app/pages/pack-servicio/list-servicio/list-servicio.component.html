@@ -1,6 +1,15 @@
 <mat-card class="mat-elevation-z8">
     <mat-card-header>
-        <mat-card-title>Servicios</mat-card-title>
+        <mat-card-title>
+            <div style="padding: 0 20px; position: relative;">
+                Servicios
+                <div style="position: absolute; top: 4px;right: 4px;">
+                    <mat-icon fontIcon="help" (click)="elementTooltip.toggle()" #elementTooltip="matTooltip"
+                    matTooltip="Se muestran todos los servicios ofrecidos con su duración y precios, si alguno se elimina se cancelarán todas sus reservas."
+                    ></mat-icon>
+                </div>
+            </div>
+        </mat-card-title>
     </mat-card-header>
     <mat-card-content>
         <mat-list> 

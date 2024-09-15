@@ -13,6 +13,7 @@ import { ToastrService } from 'ngx-toastr';
 import { ServicioService } from '../../../services/servicio.service';
 import { MatCardModule } from '@angular/material/card';
 import { MatMenuModule } from '@angular/material/menu';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 @Component({
   selector: 'app-list-servicio',
@@ -25,7 +26,8 @@ import { MatMenuModule } from '@angular/material/menu';
     MatDialogModule,
     MatGridListModule,
     MatCardModule,
-    MatMenuModule
+    MatMenuModule,
+    MatTooltipModule
   ],
   templateUrl: './list-servicio.component.html',
   styleUrl: './list-servicio.component.scss'

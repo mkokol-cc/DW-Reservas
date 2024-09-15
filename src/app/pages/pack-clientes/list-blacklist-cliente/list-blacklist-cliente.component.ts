@@ -10,12 +10,20 @@ import { MatListModule } from '@angular/material/list';
 import { MatCardModule } from '@angular/material/card';
 import { DialogConfirmComponent } from '../../../components/dialog-confirm/dialog-confirm.component';
 import { ToastrService } from 'ngx-toastr';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 @Component({
   selector: 'app-list-blacklist-cliente',
   standalone: true,
-  imports: [MatButtonModule,MatIconModule,MatExpansionModule,MatListModule,MatDialogModule,MatGridListModule,
-    MatCardModule
+  imports: [
+    MatButtonModule,
+    MatIconModule,
+    MatExpansionModule,
+    MatListModule,
+    MatDialogModule,
+    MatGridListModule,
+    MatCardModule,
+    MatTooltipModule
   ],
   templateUrl: './list-blacklist-cliente.component.html',
   styleUrl: './list-blacklist-cliente.component.scss'

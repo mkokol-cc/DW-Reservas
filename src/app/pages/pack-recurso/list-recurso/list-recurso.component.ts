@@ -13,6 +13,7 @@ import { Recurso } from '../../../interfaces/recurso';
 import { RecursoService } from '../../../services/recurso.service';
 import { MatCardModule } from '@angular/material/card';
 import { MatMenuModule } from '@angular/material/menu';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 @Component({
   selector: 'app-list-recurso',
@@ -25,7 +26,8 @@ import { MatMenuModule } from '@angular/material/menu';
     MatDialogModule,
     MatGridListModule,
     MatCardModule,
-    MatMenuModule
+    MatMenuModule,
+    MatTooltipModule
   ],
   templateUrl: './list-recurso.component.html',
   styleUrl: './list-recurso.component.scss'

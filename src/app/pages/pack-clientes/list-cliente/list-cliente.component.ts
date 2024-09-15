@@ -11,6 +11,8 @@ import { MatDialog } from '@angular/material/dialog';
 import { TableClienteComponent } from '../../../components/table-cliente/table-cliente.component';
 import { TableClienteMobileComponent } from '../../../components/table-cliente-mobile/table-cliente-mobile.component';
 import { ToastrService } from 'ngx-toastr';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-list-cliente',
@@ -22,7 +24,9 @@ import { ToastrService } from 'ngx-toastr';
     MatCardModule, 
     MatButtonModule,
     TableClienteComponent,
-    TableClienteMobileComponent
+    TableClienteMobileComponent,
+    MatTooltipModule,
+    MatIconModule
   ],
   templateUrl: './list-cliente.component.html',
   styleUrl: './list-cliente.component.scss'

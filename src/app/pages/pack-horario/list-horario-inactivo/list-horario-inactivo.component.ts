@@ -8,6 +8,7 @@ import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 import { MatChipsModule } from '@angular/material/chips';
 import { ToastrService } from 'ngx-toastr';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 @Component({
   selector: 'app-list-horario-inactivo',
@@ -19,7 +20,8 @@ import { ToastrService } from 'ngx-toastr';
     MatButtonModule,
     CommonModule,
     MatIconModule,
-    MatChipsModule
+    MatChipsModule,
+    MatTooltipModule
   ],
   templateUrl: './list-horario-inactivo.component.html',
   styleUrl: './list-horario-inactivo.component.scss'

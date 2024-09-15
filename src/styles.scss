@@ -59,3 +59,10 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 mat-card, mat-card mat-card-content{
     height: 100% !important;
 }
+
+mat-card-header{
+  text-align: start;
+}
+.mat-mdc-card-header-text{
+  width: 100%;
+}

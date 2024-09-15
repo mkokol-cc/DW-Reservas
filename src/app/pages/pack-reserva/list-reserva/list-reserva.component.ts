@@ -28,6 +28,7 @@ import { EditReservaComponent } from '../edit-reserva/edit-reserva.component';
 import { TableReservaComponent } from '../../../components/table-reserva/table-reserva.component';
 import { TableReservaMobileComponent } from '../../../components/table-reserva-mobile/table-reserva-mobile.component';
 import { ToastrService } from 'ngx-toastr';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 export interface RegistroTabla {
   id: number;
@@ -58,7 +59,7 @@ registerLocaleData(localeEs);
     MatSelectModule,
     MatDialogModule,MatChipsModule,
     MatCardModule,
-
+    MatTooltipModule,
     TableReservaComponent,
     TableReservaMobileComponent
   ],

@@ -1,6 +1,15 @@
 <mat-card class="mat-elevation-z8">
   <mat-card-header>
-      <mat-card-title>Clientes</mat-card-title>
+      <mat-card-title>
+        <div style="padding: 0 20px; position: relative;">
+          Clientes
+          <div style="position: absolute; top: 4px;right: 4px;">
+              <mat-icon fontIcon="help" (click)="elementTooltip.toggle()" #elementTooltip="matTooltip"
+              matTooltip="Se muestran todas las personas que han realizado alguna reserva, puedes enviarlas a la lista negra y se bloquearan nuevas reservas para el numero telefónico registrado."
+              ></mat-icon>
+          </div>
+      </div>
+      </mat-card-title>
   </mat-card-header>
   <mat-card-content>
     <mat-form-field>

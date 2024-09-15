@@ -3,7 +3,14 @@
         <mat-card class="mat-elevation-z8">
             <mat-card-header>
                 <mat-card-title>
-                    Mis Horarios
+                    <div style="padding: 0 20px; position: relative;">
+                        Mis Horarios
+                        <div style="position: absolute; top: 4px;right: 4px;">
+                            <mat-icon fontIcon="help" (click)="elementTooltip.toggle()" #elementTooltip="matTooltip"
+                            matTooltip="Registra y ajusta los horarios de atención disponibles. Puedes agregar, editar y programar los horarios para las fechas que prefieras, facilitando la organización de las reservas."
+                            ></mat-icon>
+                        </div>
+                    </div>
                 </mat-card-title>
             </mat-card-header>
             <mat-card-content>
